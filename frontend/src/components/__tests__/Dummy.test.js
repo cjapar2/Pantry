@@ -10,7 +10,7 @@ const URL = '/v0/dummy'
 
 const server = setupServer(
   rest.get(URL, (req, res, ctx) => {
-    return res(ctx.json({message: 'Hello CSE183'}))
+    return res(ctx.json({message: 'Pantry project test'}))
   }),
 )
 
@@ -23,7 +23,7 @@ afterAll(() => server.close());
  test('Button Clickable', async () => {
   render(<Dummy />);
   fireEvent.click(screen.getByText('Get Dummy'));
-  await waitFor(() => screen.getByText('Hello CSE183'))
+  await waitFor(() => screen.getByText('Pantry project test'))
 });
 
 /**

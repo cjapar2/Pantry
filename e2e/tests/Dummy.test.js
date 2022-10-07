@@ -57,9 +57,9 @@ test('Get Dummy', async () => {
   expect(cont).toBe('Click the button!');
   await page.click('aria/get dummy[role="button"]');
   await page.waitForFunction(
-    'document.querySelector("label").innerText.includes("Hello CSE183")',
+    'document.querySelector("label").innerText.includes("Pantry project test")',
   );
   cont = await (await label.getProperty('textContent')).jsonValue();
-  expect(cont.search(/Hello CSE183/)).toEqual(0);
+  expect(cont.search(/Pantry project test/)).toEqual(0);
   expect(cont.search(/Database created/)).toBeGreaterThan(60);
 });

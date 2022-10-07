@@ -1,13 +1,13 @@
 #
-# CSE183 Assignment 8 Backend
+# Pantry Backend
 #
 
 openapi: '3.0.3'
 
 info:
-  description: CSE115A Project
+  description: Pantry Backend
   version: 0.1.0
-  title: Pantry
+  title: Pantry Backend
 
 servers:
   - url: http://localhost:3010/v0

@@ -20,6 +20,6 @@ const selectDummy = async () => {
 
 exports.get = async (req, res) => {
   res.status(200).json({message:
-    `Hello CSE183 @ ${new Date().toString()} ` +
+    `Pantry project test @ ${new Date().toString()} ` +
     `[ Database created ${await selectDummy()} ]`});
 };

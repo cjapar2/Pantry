@@ -1,7 +1,7 @@
 {
-  "name": "cse183-assignment8-e2etest",
+  "name": "pantry-project-e2etest",
   "version": "1.0.0",
-  "description": "CSE183 Assignment 8 - End to End Test",
+  "description": "Pantry - End to End Test",
   "author": "David Harrison <dcharris@ucsc.edu>",
   "license": "UNLICENSED",
   "repository": "none",

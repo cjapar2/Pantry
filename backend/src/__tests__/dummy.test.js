@@ -30,7 +30,7 @@ test('GET Dummy', async () => {
       expect(res).toBeDefined();
       expect(res.body).toBeDefined();
       expect(res.body.message).toBeDefined();
-      expect(res.body.message.search(/Hello CSE183/)).toEqual(0);
+      expect(res.body.message.search(/Pantry project test/)).toEqual(0);
       expect(res.body.message.search(/Database created/)).toBeGreaterThan(60);
     });
 });
