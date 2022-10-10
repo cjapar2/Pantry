@@ -30,6 +30,49 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /signup:
+    get:
+      description: Get all suers
+      responses:
+        200:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsrItem'
+          
+        default:
+          description: Unexpected Error
+          content:
+            applcation/json:
+              schema:
+                $ref: '#/components/schemas/UnexpectedError'
+
+    post:
+      description: Creates a new account
+      requestBody:
+        description: Account to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUser'
+      responses:
+        201:
+          description: Successfully created account 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewUser'
+        409:
+          description: Email already in use
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnexpectedError'
+
 components:
   schemas:
     Error:
@@ -49,3 +92,46 @@ components:
           type: string
       required:
         - message
+    UnexpectedError:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    
+    NewUser:
+      type: object
+      properties:
+        name:
+            type: string
+        email:
+            type: string
+            format: email
+            # https://regexpattern.com/email-address/
+            pattern: ^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$
+        password:
+          type: string
+
+    UsrItem:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+          # https://regexpattern.com/email-address/
+          pattern: ^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$
+        password:
+          type: string
+
+
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
