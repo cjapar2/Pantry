@@ -9,6 +9,7 @@ const OpenApiValidator = require('express-openapi-validator');
 const dummy = require('./dummy');
 const login = require('./login');
 const auth = require('./auth');
+const foodlist = require('./foodlist');
 
 const app = express();
 app.use(cors());
@@ -30,9 +31,17 @@ app.use(
 );
 
 app.get('/v0/dummy', dummy.get);
+
 // Your routes go here
 app.get('/v0/signup', login.getUsers);
 app.post('/v0/signup', login.postUser);
+
+//
+
+// Gets
+app.get('/v0/foodlist', foodlist.getFood);
+app.post('/v0/foodlist', foodlist.postFood);
+//
 
 app.use((err, req, res, next) => {
   res.status(err.status).json({

@@ -1,0 +1,15 @@
+const db = require('./db');
+
+exports.getFood = async (req, res) => {
+    const items = await db.selectFoodItems(req.body);
+    res.status(200).json(items);
+};
+
+exports.postFood = async (req, res) => {
+    const success = await db.insertFood(req.body);
+    if (success === 201) {
+        res.status(201).send('Successfully added food');
+    } else {
+        res.status(409).send('Food Already Exists');
+    }
+};

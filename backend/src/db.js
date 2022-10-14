@@ -46,3 +46,28 @@ exports.selectUsers = async (body) => {
   const {rows} = await pool.query(query);
   return {rows};
 };
+
+exports.selectFoodItems = async (body) => {
+  const query = {
+    text: 'SELECT * FROM foodTable',
+    values: []
+  };
+  const {rows} = await pool.query(query);
+  return {rows}
+};
+
+exports.insertFood = async (body) => {
+  const searchUser = await this.searchUser(body.email);
+  if (!searchUser) {
+    const insert = `INSERT INTO foodTable(item) VALUES ($1);`;
+    const query = {
+      text: insert,
+      values: [body],
+    };
+    // console.log(query);
+    await pool.query(query);
+    return 201;
+  } else {
+    return 409;
+  }
+};

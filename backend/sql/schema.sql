@@ -7,3 +7,7 @@ CREATE TABLE dummy(created TIMESTAMP WITH TIME ZONE);
 DROP TABLE IF EXISTS loginTable;
 
 CREATE TABLE loginTable(usr jsonb PRIMARY KEY);
+
+CREATE TABLE foodTable(
+    item jsonb
+);
