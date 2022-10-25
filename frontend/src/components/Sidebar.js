@@ -8,8 +8,8 @@ import './Sidebar.css';
  */
 export default function Sidebar() {
   return (
-    <div class='sidebar'>
-      <div class='sidebar-buttons'>
+    <div className='sidebar'>
+      <div className='sidebar-buttons'>
         <ul>
           <li> <a href="test1">Join a Group</a></li>
           <li> <a href="test2">Create a Group</a></li>

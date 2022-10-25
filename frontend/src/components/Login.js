@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import {useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {FormControl, FormGroup, TextField, Typography} from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
  */
 function Login() {
   const [user, setUser] = React.useState({username: '', password: ''});
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const {value, name} = event.target;
@@ -22,9 +22,14 @@ function Login() {
     setUser(u);
   };
 
+  const goToCreateAccount = (event) => {
+    navigate('/createaccount');
+  };
+
   // Do backend call/authentication here
   // Doesn't work
   const onLoginSubmit = (event) => {
+    navigate('/mainlist');
     event.preventDefault();
   /*  fetch('/authenticate', {
       method: 'POST',
@@ -106,11 +111,13 @@ function Login() {
                 fontSize: '22px',
                 pb: '5px',
               }}>Don't have an account?</Typography>
-              <Button variant='contained' size='large' sx={{
-                alignSelf: 'center',
-                backgroundColor: 'darkblue',
-                height: '35px',
-              }}>Sign Up</Button>
+              <Button variant='contained' size='large'
+                onClick={goToCreateAccount}
+                sx={{
+                  alignSelf: 'center',
+                  backgroundColor: 'darkblue',
+                  height: '35px',
+                }}>Sign Up</Button>
             </FormGroup>
           </Grid>
         </Grid>

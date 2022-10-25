@@ -14,7 +14,7 @@ export default function Navbar() {
       </a>
       <ul>
         <li>
-          <a href="/b1">Logout</a>
+          <a href="/">Logout</a>
         </li>
       </ul>
     </nav>
