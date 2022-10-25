@@ -23,76 +23,98 @@ function Login() {
   };
 
   // Do backend call/authentication here
+  // Doesn't work
   const onLoginSubmit = (event) => {
     event.preventDefault();
-    console.log('login clicked');
+  /*  fetch('/authenticate', {
+      method: 'POST',
+      body: JSON.stringify(user),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((json) => {
+        localStorage.setItem('user', JSON.stringify(json));
+        navigate('/home');
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('Error logging in, please try again');
+      });
+    */
   };
 
   return (
     <Box sx={{
-      width: '50%',
-      display: 'flex',
-      flexDirection: 'column',
-      pt: '5%',
+      width: '100%',
+      height: '95vh',
+    //  border: 'solid',
     }}>
-      <Grid container direction={'column'} columns={1}
-        spacing={3} justifyContent='center'
-        sx={{
-          alignItems: 'center',
-        }}>
-        <Grid item>
-          <FormControl sx={{
-            justifyContent: 'center',
-            alignContent: 'center',
-            verticalAlign: 'center',
+      <Box sx={{
+        width: '50%',
+        display: 'flex',
+        flexDirection: 'column',
+        pt: '5%',
+      }}>
+        <Grid container direction={'column'} columns={1}
+          spacing={3} justifyContent='center'
+          sx={{
+            alignItems: 'center',
           }}>
-            <Typography sx={{
-              textAlign: 'center',
-              fontSize: '26px',
-              pb: '25px',
-            }}>Welcome to Pantry</Typography>
-            <TextField label='Username' size='small'
-              onChange={handleInputChange} name='username'
-              sx={{
-                alignSelf: 'center',
-                pb: '20px',
-                minWidth: '100px',
-              }}/>
-            <TextField label='Password' size='small'
-              onChange={handleInputChange} name='password'
-              sx={{
-                alignSelf: 'center',
-                pb: '20px',
-                minWidth: '100px',
-              }}/>
-            <Button variant='contained' type='submit' size='large'
-              onClick={onLoginSubmit}
-              sx={{
+          <Grid item>
+            <FormControl sx={{
+              justifyContent: 'center',
+              alignContent: 'center',
+              verticalAlign: 'center',
+            }}>
+              <Typography sx={{
+                textAlign: 'center',
+                fontSize: '26px',
+                pb: '25px',
+              }}>Welcome to Pantry</Typography>
+              <TextField label='Username' size='small'
+                onChange={handleInputChange} name='username'
+                sx={{
+                  alignSelf: 'center',
+                  pb: '20px',
+                  minWidth: '100px',
+                }}/>
+              <TextField label='Password' size='small'
+                onChange={handleInputChange} name='password'
+                sx={{
+                  alignSelf: 'center',
+                  pb: '20px',
+                  minWidth: '100px',
+                }}/>
+              <Button variant='contained' type='submit' size='large'
+                onClick={onLoginSubmit}
+                sx={{
+                  alignSelf: 'center',
+                  backgroundColor: 'darkblue',
+                  height: '35px',
+                }}>Login</Button>
+            </FormControl>
+          </Grid>
+          <Grid item alignContent='center'>
+            <FormGroup sx={{
+              justifyContent: 'center',
+              alignContent: 'center',
+              pt: '35px',
+            }}>
+              <Typography sx={{
+                textAlign: 'center',
+                fontSize: '22px',
+                pb: '5px',
+              }}>Don't have an account?</Typography>
+              <Button variant='contained' size='large' sx={{
                 alignSelf: 'center',
                 backgroundColor: 'darkblue',
                 height: '35px',
-              }}>Login</Button>
-          </FormControl>
+              }}>Sign Up</Button>
+            </FormGroup>
+          </Grid>
         </Grid>
-        <Grid item alignContent='center'>
-          <FormGroup sx={{
-            justifyContent: 'center',
-            alignContent: 'center',
-            pt: '35px',
-          }}>
-            <Typography sx={{
-              textAlign: 'center',
-              fontSize: '22px',
-              pb: '5px',
-            }}>Don't have an account?</Typography>
-            <Button variant='contained' size='large' sx={{
-              alignSelf: 'center',
-              backgroundColor: 'darkblue',
-              height: '35px',
-            }}>Sign Up</Button>
-          </FormGroup>
-        </Grid>
-      </Grid>
+      </Box>
     </Box>
   );
 }

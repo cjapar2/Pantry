@@ -1,7 +1,9 @@
 import React from 'react';
-import Box from '@mui/material/Box';
+// import Box from '@mui/material/Box';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import Login from './Login';
+import Dummy from './Dummy';
 
 /**
  * Simple component with no state.
@@ -10,14 +12,12 @@ import Login from './Login';
  */
 function App() {
   return (
-    <Box sx={{
-      width: '100%',
-      height: '95vh',
-    //  border: 'solid',
-    }}>
-      <Login/>
-    </Box>
-  // <Dummy />
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Login/>} />
+        <Route path='/home' element={<Dummy/>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
