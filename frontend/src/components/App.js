@@ -9,6 +9,7 @@ import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import Mainlist from './Mainlist';
 import CreateAccount from './CreateAccount';
+import Rightbar from './Rightbar';
 
 /**
  * Simple component with no state.
@@ -22,7 +23,7 @@ function App() {
         <Route path='/' element={<Login/>} />
         <Route path='/home' element={<Dummy/>} />
         <Route path='/mainlist' element={<div>
-          <Mainlist/><Navbar/><Sidebar/>
+          <Mainlist/><Navbar/><Sidebar/><Rightbar/>
         </div>} />
         <Route path='/createaccount' element={<CreateAccount/>} />
       </Routes>
