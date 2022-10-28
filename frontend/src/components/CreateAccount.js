@@ -60,17 +60,17 @@ function CreateAccount() {
             <Button variant='contained' size='large'
               onClick={onLoginSubmit}
               sx={{
-              alignSelf: 'center',
-              backgroundColor: 'darkblue',
-              height: '35px',
-            }}>Login</Button>
-             <Button variant='contained' size='large'
+                alignSelf: 'center',
+                backgroundColor: 'darkblue',
+                height: '35px',
+              }}>Login</Button>
+            <Button variant='contained' size='large'
               onClick={onReturnSubmit}
               sx={{
-              alignSelf: 'center',
-              backgroundColor: 'darkblue',
-              height: '35px',
-            }}>Return</Button>
+                alignSelf: 'center',
+                backgroundColor: 'darkblue',
+                height: '35px',
+              }}>Return</Button>
           </FormGroup>
         </Grid>
 
