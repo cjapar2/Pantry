@@ -11,6 +11,7 @@ export default function Sidebar() {
   console.log(name);
 
   const nameSubmit = (event) => {
+    event.preventDefault();
     const nameObject = {'name': name};
     fetch('http://localhost:3010/v0/foodlist', {
       method: 'POST',
@@ -20,13 +21,18 @@ export default function Sidebar() {
       },
     })
       .then((res) => {
+        console.log(res);
         if (!res.ok) {
           throw res;
         }
         return res.json();
       })
-      .then(() => {
-        addItemButton();
+      .then((json) => {
+        addItemButton(json);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err);
       });
   };
 
@@ -76,14 +82,20 @@ export default function Sidebar() {
 
 /**
  * Adds an item to the list
- *
+ * @param {object} itemObj item object containing different characteristics
  * @return {object} True or False
 */
-function addItemButton() {
+function addItemButton(itemObj) {
   if (!document.getElementById('itemName').value) {
     console.log('Name empty');
   } else {
     console.log(document.getElementById('itemName').value);
+    console.log('obj', itemObj);
+    const newListItem = document.createElement('li');
+    newListItem.appendChild(document.createTextNode('test'));
+    const mainItemList = document.getElementById('mainItemList');
+    mainItemList.appendChild(newListItem);
+    console.log('done');
   }
   if (!document.getElementById('itemCount').value) {
     console.log('Count empty');
