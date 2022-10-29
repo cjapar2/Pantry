@@ -4,7 +4,7 @@ body {
 
 .mainList{
   position: absolute;
-  width: 80%;
+  width: 70%;
   left: 180px;
   top: 80px;
   border-color: black;
@@ -21,6 +21,7 @@ body {
   margin-top: 5px;
 }
 
+/*
 .addItemButton{
   display: inline;
   position: absolute;
@@ -52,6 +53,7 @@ body {
   background-color: white;
   outline: none;
 }
+*/
 
 .addItemTextbox.active{
   background-color: none;

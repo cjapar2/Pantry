@@ -1,0 +1,76 @@
+* {
+  z-index: 1;
+}
+
+.rightbar{
+  position: fixed;
+  right:0;
+  height: 100%;
+  width: 20%;
+  background-color: lightgray;
+  place-items: center;
+  float: left;
+}
+
+.rightbar-buttons{
+  position: fixed;
+  top: 7%;
+  width: inherit;
+  place-items: center;
+  text-align: center;
+}
+
+.addItemName{
+  width: 90%;
+  font-size: 18px;
+}
+
+.addItemCount{
+  width: 20%;
+  font-size: 18px;
+}
+
+.addItemButton{
+  padding: 10px;
+  border-radius: 10px;
+  border-color: black;
+  border-width: 1px;
+}
+
+.addItemButton:hover{
+  background-color: gray;
+}
+
+.addItemDesc{
+  width: 90%;
+  height: 200px
+}
+
+.rightbar ul{
+  font-size: 20px;
+  padding-left: 10px;
+  padding-top: 0;
+  list-style: none;
+}
+
+.rightbar .boxLabel{
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.rightbar li{
+  margin: 0px;
+  text-align: left;
+}
+
+.rightbar a:hover{
+  background-color: gray;
+}
+
+.rightbar a:visited{
+  color: black;
+}
+
+.rightbar a{
+  text-decoration: none;
+}

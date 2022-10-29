@@ -9,6 +9,7 @@ import CreateAccount from './CreateAccount';
 import {ProtectedRoute} from './ProtectedRoute';
 import {AuthProvider, useAuth} from './AuthProvider';
 import {useLocalStorage} from './UseLocalStorage';
+import Rightbar from './Rightbar';
 
 /**
  * Simple component with no state.
@@ -34,7 +35,7 @@ function App() {
             {user ? <Navigate to='/mainlist'/> : <Login/>}/>
           <Route element={<ProtectedRoute/>}>
             <Route path='/mainlist' element={<div>
-              <Mainlist/><Navbar/><Sidebar/>
+              <Mainlist/><Navbar/><Sidebar/><Rightbar/>
             </div>} />
           </Route>
         </Routes>

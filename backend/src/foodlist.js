@@ -8,8 +8,9 @@ exports.getFood = async (req, res) => {
 exports.postFood = async (req, res) => {
     const success = await db.insertFood(req.body);
     if (success === 201) {
-        res.status(201).send('Successfully added food');
+        console.log('test');
+        res.status(201).send(req.body);
     } else {
-        res.status(409).send('Food Already Exists');
+        res.status(409).send();
     }
 };
