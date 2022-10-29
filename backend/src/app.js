@@ -20,6 +20,7 @@ const apiSpec = path.join(__dirname, '../api/openapi.yaml');
 
 const apidoc = yaml.load(fs.readFileSync(apiSpec, 'utf8'));
 app.use('/v0/api-docs', swaggerUi.serve, swaggerUi.setup(apidoc));
+
 app.post('/authenticate', auth.authenticate);
 
 app.use(
@@ -39,8 +40,8 @@ app.post('/v0/signup', login.postUser);
 //
 
 // Gets
-app.get('/v0/foodlist', foodlist.getFood);
-app.post('/v0/foodlist', foodlist.postFood);
+app.get('/v0/foodlist', auth.check, foodlist.getFood);
+app.post('/v0/foodlist', auth.check, foodlist.postFood);
 //
 
 app.use((err, req, res, next) => {

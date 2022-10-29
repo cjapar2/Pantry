@@ -4,6 +4,7 @@ import {FormControl, FormGroup, TextField, Typography} from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
+import {useAuth} from './AuthProvider';
 
 /**
  * Component that displays the Login Page.
@@ -12,6 +13,7 @@ import Button from '@mui/material/Button';
  */
 function Login() {
   const [user, setUser] = React.useState({username: '', password: ''});
+  const authentication = useAuth();
   const navigate = useNavigate();
 
   const handleInputChange = (event) => {
@@ -26,34 +28,36 @@ function Login() {
     navigate('/createaccount');
   };
 
-  // Do backend call/authentication here
-  // Doesn't work
+  // Show error to user -> Don't think if statement for response is firing.
+  // Double-check authentication stuff
   const onLoginSubmit = (event) => {
-    navigate('/mainlist');
     event.preventDefault();
-  /*  fetch('/authenticate', {
+    fetch('/authenticate', {
       method: 'POST',
       body: JSON.stringify(user),
       headers: {
         'Content-Type': 'application/json',
       },
     })
+      .then((response) => {
+        if (!response.ok) {
+          throw response;
+        }
+        return response.json();
+      })
       .then((json) => {
-        localStorage.setItem('user', JSON.stringify(json));
-        navigate('/home');
+        authentication.login(json);
       })
       .catch((error) => {
         console.log(error);
         alert('Error logging in, please try again');
       });
-    */
   };
 
   return (
-    <Box sx={{
-      width: '100%',
-      height: '95vh',
-    //  border: 'solid',
+    // if (authentication.user) {navigate('/mainlist');}
+    <Box className='outerContainer' sx={{
+      //  border: 'solid',
     }}>
       <Box sx={{
         width: '50%',
@@ -61,17 +65,10 @@ function Login() {
         flexDirection: 'column',
         pt: '5%',
       }}>
-        <Grid container direction={'column'} columns={1}
-          spacing={3} justifyContent='center'
-          sx={{
-            alignItems: 'center',
-          }}>
+        <Grid container className='gridContainer' direction={'column'}
+          columns={1} spacing={3} alignItems={'center'}>
           <Grid item>
-            <FormControl sx={{
-              justifyContent: 'center',
-              alignContent: 'center',
-              verticalAlign: 'center',
-            }}>
+            <FormControl className='formControl'>
               <Typography sx={{
                 textAlign: 'center',
                 fontSize: '26px',

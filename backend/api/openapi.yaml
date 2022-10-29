@@ -13,6 +13,24 @@ servers:
   - url: http://localhost:3010/v0
 
 paths:
+  /authenticate:
+    post:
+      description: Authenticate user
+      responses:
+        200:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthUser'
+          
+        default:
+          description: Unexpected Error
+          content:
+            applcation/json:
+              schema:
+                $ref: '#/components/schemas/UnexpectedError'
+
   /dummy:
     get:
       description: Dummy Endpoint
@@ -40,6 +58,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UsrItem'
+        401:
+          description: Invalid Username or Email
           
         default:
           description: Unexpected Error
@@ -142,6 +162,14 @@ components:
           type: integer
           format: int32
         message:
+          type: string
+
+    AuthUser:
+      type: object
+      properties:
+        name:
+          type: string
+        token:
           type: string
     
     NewUser:

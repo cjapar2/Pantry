@@ -1,4 +1,10 @@
 const {Pool} = require('pg');
+const jwt = require('jsonwebtoken');
+const secrets = require('./secrets.json');
+var bcrypt = require('bcrypt');
+var db = require('./db');
+
+//const secrets
 // const db = require('./db');
 
 const pool = new Pool({
@@ -10,23 +16,38 @@ const pool = new Pool({
 });
 
 exports.authenticate = async (req, res) => {
-  // need to do something with password, linter error
-  // eslint-disable-next-line no-unused-vars
-  // console.log('inside authenticate');
-  const {user, password} = req.body;
-  // console.log(pass);
-  // await db.searchUser(user);
-  let query = {};
-  // eslint-disable-next-line max-len
-  const select = `SELECT * FROM logintable WHERE usr->>'email' = $1 AND usr->>'password' = $2`;
-  query = {
-    text: select,
-    values: [user, password],
-  };
-  const {rows} = await pool.query(query);
-  if (rows.length !== 0) {
-    res.status(200).json(rows[0]);
+  const user = await db.getUser(req.body);
+  // console.log(req.body);
+  // console.log(user.password);
+  // console.log(user);
+
+  if (user.length != 0 && bcrypt.compareSync(req.body.password, user[0].usr.password)) {
+    // console.log('test');
+    const accessToken = jwt.sign(
+      {email: user[0].usr.email}, 
+      secrets.accessToken, {
+        // expiresIn: '30m',
+        algorithm: 'HS256'
+      });
+    res.status(200).json({name: user[0].usr.name, accessToken: accessToken});
   } else {
-    res.status(401).send('Username or password incorrect');
+    // console.log('fail');
+    res.status(401).send();
+  }
+};
+
+exports.check = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+    const token = authHeader.split(' ')[1];
+    jwt.verify(token, secrets.accessToken, (err, user) => {
+      if (err) {
+        return res.sendStatus(403);
+      }
+      req.user = user;
+      next();
+    });
+  } else {
+    res.sendStatus(401);
   }
 };

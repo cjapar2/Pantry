@@ -1,0 +1,14 @@
+.outerContainer {
+    width: '100%';
+    height: '95vh';
+    /*border: 'solid';*/
+}
+
+.gridContainer {
+    justify-content: center;
+}
+
+.formControl {
+    justify-content: center;
+    align-content: center;
+}

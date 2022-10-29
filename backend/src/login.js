@@ -12,5 +12,6 @@ exports.postUser = async (req, res) => {
 
 exports.getUsers = async (req, res) => {
   const users = await db.selectUsers(req.body);
+  // console.log(users);
   res.status(200).json(users);
 };

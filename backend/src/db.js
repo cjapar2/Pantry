@@ -33,7 +33,6 @@ exports.searchUser = async (email) => {
     values: [email],
   };
 
-  // console.log(query);
   const {rows} = await pool.query(query);
   return rows.length == 1 ? true : false;
 };
@@ -46,6 +45,17 @@ exports.selectUsers = async (body) => {
   const {rows} = await pool.query(query);
   return {rows};
 };
+
+exports.getUser = async (body) => {
+  console.log(body);
+  const email = body.username;
+  const query = {
+    text: "SELECT * FROM loginTable WHERE usr->>'email' = $1",
+    values: [email],
+  }
+  const {rows} = await pool.query(query);
+  return rows;
+}
 
 exports.selectFoodItems = async (body) => {
   const query = {
