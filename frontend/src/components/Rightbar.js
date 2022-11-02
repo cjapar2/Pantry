@@ -10,20 +10,31 @@ import {useAuth} from './AuthProvider';
  * @return {object} JSX
  */
 export default function Sidebar() {
-  const [name, setName] = useState('');
+  // Create a date object from a date string
+  var currentDate = new Date();
+
+  // Get year, month, and day part from the date
+  var year = currentDate.toLocaleString("default", { year: "numeric" });
+  var month = currentDate.toLocaleString("default", { month: "2-digit" });
+  var day = currentDate.toLocaleString("default", { day: "2-digit" });
+
+  // Generate yyyy-mm-dd date string
+  var formattedDate = year + "-" + month + "-" + day;
+
+  // State elements of food item object
+  const [item, setItem] = useState('');
   const [amount, setAmount] = useState(0);
-  const [date, setDate] = useState(new Date());
-  const [description, setDescription] = useState('');
+  const [purchaseDate, setPurchaseDate] = useState(formattedDate.toString()); // convert date type to string type
+  const [notes, setNotes] = useState('');
   const authentication = useAuth();
-  console.log(name);
 
   const nameSubmit = (event) => {
     event.preventDefault();
-    const nameObject = {'name': name, 'amount': amount, 'date': date, 'description': description};
-    console.log(JSON.stringify(nameObject));
+    // const itemObject = {item, amount, purchasedate, notes};
+    const itemObject = {"item":item,"amount":amount,"purchaseDate":purchaseDate,"notes":notes};
     fetch('http://localhost:3010/v0/foodlist', {
       method: 'POST',
-      body: JSON.stringify(nameObject),
+      body: JSON.stringify(itemObject),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${authentication.getToken()}`,
@@ -40,7 +51,7 @@ export default function Sidebar() {
         addItemButton(json);
       })
       .catch((err) => {
-        console.log(err);
+        console.log('err', err);
         alert(err);
       });
   };
@@ -56,7 +67,7 @@ export default function Sidebar() {
               type="text"
               className='addItemName'
               placeholder='Item Name'
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setItem(e.target.value)}
             />
             </li>
             <li></li>
@@ -74,7 +85,7 @@ export default function Sidebar() {
               type="date"
               className='addItemDate'
               placeholder='Input an item to add...'
-              onChange={(e) => setDate(e.target.value)}/></li>
+              onChange={(e) => setPurchaseDate(e.target.value)}/></li>
                
             <li className='boxLabel'>Description of Item</li>
             <li><textarea
@@ -82,7 +93,7 @@ export default function Sidebar() {
               type="text"
               className='addItemDesc'
               placeholder='Write a description for your item...'
-              onChange={(e) => setDescription(e.target.value)}/></li>
+              onChange={(e) => setNotes(e.target.value)}/></li>
              
             <li className='buttonLi'>
               <button onClick={addItemButton}
