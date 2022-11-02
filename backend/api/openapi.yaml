@@ -128,7 +128,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NewUser'
+              $ref: '#/components/schemas/NewFoodItem'
+
       responses:
         201:
           description: Successfully added account 
@@ -230,8 +231,24 @@ components:
       properties:
         name:
           type: string
+        amount:
+          type: string
+        date:
+          type: string
+        description:
+          type: string
+        
     NewFoodItem:
       type: object
       properties:
         name:
           type: string
+        amount:
+          type: string
+        date:
+          type: string
+        description:
+          type: string
+      required:
+        - name
+        - date
