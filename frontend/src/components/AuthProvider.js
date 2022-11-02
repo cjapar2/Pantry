@@ -24,8 +24,13 @@ export const AuthProvider = ({children}) => {
     navigate('/', {replace: true});
   };
 
+  const getToken = () => {
+    const userLocal = JSON.parse(localStorage.getItem('user'))
+    return userLocal['accessToken'];
+  };
+
   return <AuthContext.Provider value=
-    {{user, setUser, login, logout}}>{children}</AuthContext.Provider>;
+    {{user, setUser, login, logout, getToken}}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => {
