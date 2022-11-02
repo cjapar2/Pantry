@@ -11,12 +11,16 @@ import {useAuth} from './AuthProvider';
  */
 export default function Sidebar() {
   const [name, setName] = useState('');
+  const [amount, setAmount] = useState(0);
+  const [date, setDate] = useState(new Date());
+  const [description, setDescription] = useState('');
   const authentication = useAuth();
   console.log(name);
 
   const nameSubmit = (event) => {
     event.preventDefault();
-    const nameObject = {'name': name};
+    const nameObject = {'name': name, 'amount': amount, 'date': date, 'description': description};
+    console.log(JSON.stringify(nameObject));
     fetch('http://localhost:3010/v0/foodlist', {
       method: 'POST',
       body: JSON.stringify(nameObject),
@@ -61,19 +65,25 @@ export default function Sidebar() {
               id="itemCount"
               type="number"
               className='addItemCount'
-              placeholder=''/></li>
+              placeholder=''
+              onChange={(e) => setAmount(e.target.value)}/></li>
+             
             <li className='boxLabel'>Date Purchased</li>
             <li><input
               id="itemDate"
               type="date"
               className='addItemDate'
-              placeholder='Input an item to add...'/></li>
+              placeholder='Input an item to add...'
+              onChange={(e) => setDate(e.target.value)}/></li>
+               
             <li className='boxLabel'>Description of Item</li>
             <li><textarea
               id="itemDesc"
               type="text"
               className='addItemDesc'
-              placeholder='Write a description for your item...'/></li>
+              placeholder='Write a description for your item...'
+              onChange={(e) => setDescription(e.target.value)}/></li>
+             
             <li className='buttonLi'>
               <button onClick={addItemButton}
                 className='addItemButton'>Add Item</button>
