@@ -2,6 +2,7 @@
 
 import React, {useState} from 'react';
 import './Rightbar.css';
+import {useAuth} from './AuthProvider';
 
 /**
  * Simple component with no state.
@@ -10,6 +11,7 @@ import './Rightbar.css';
  */
 export default function Sidebar() {
   const [name, setName] = useState('');
+  const authentication = useAuth();
   console.log(name);
 
   const nameSubmit = (event) => {
@@ -20,6 +22,7 @@ export default function Sidebar() {
       body: JSON.stringify(nameObject),
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authentication.getToken()}`,
       },
     })
       .then((res) => {

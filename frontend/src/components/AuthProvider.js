@@ -26,7 +26,7 @@ export const AuthProvider = ({children}) => {
 
   const getToken = () => {
     const userLocal = JSON.parse(localStorage.getItem('user'))
-    return userLocal['accessToken'];
+    return String(userLocal['accessToken']);
   };
 
   return <AuthContext.Provider value=
