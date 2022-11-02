@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS loginTable;
 CREATE TABLE loginTable(usr jsonb PRIMARY KEY);
 
 CREATE TABLE foodTable(
-    item jsonb,
+    item VARCHAR(1000),
     amount INT,
     purchaseDate DATE, -- YYYY-MM-DD
     notes VARCHAR(1000) -- 1000 is the max # of characters

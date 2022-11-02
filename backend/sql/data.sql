@@ -8,4 +8,4 @@ INSERT INTO loginTable(usr) VALUES ('{"name":"John Smith","email":"jsmith0@ucsc.
 
 DELETE FROM foodTable;
 INSERT INTO foodTable(item, amount, purchaseDate, notes)
-    VALUES ('{"name":"eggs"}', 5, '2022-10-27', 'these are my notes');
+    VALUES ('eggs', 5, '2022-10-27', 'these are my notes');

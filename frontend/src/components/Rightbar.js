@@ -15,7 +15,7 @@ export default function Sidebar() {
   const nameSubmit = (event) => {
     event.preventDefault();
     const nameObject = {'name': name};
-    fetch('/v0/foodlist', {
+    fetch('http://localhost:3010/v0/foodlist', {
       method: 'POST',
       body: JSON.stringify(nameObject),
       headers: {
