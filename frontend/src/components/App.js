@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, {useRef} from 'react';
 // import Box from '@mui/material/Box';
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';

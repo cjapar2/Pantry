@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 import './Navbar.css';
 import {useAuth} from './AuthProvider';

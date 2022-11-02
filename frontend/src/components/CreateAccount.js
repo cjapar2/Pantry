@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import * as React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {FormGroup, TextField, Typography} from '@mui/material';
@@ -35,7 +37,7 @@ function CreateAccount() {
     event.preventDefault();
 
     if (password.localeCompare(user.password) === 0) {
-      fetch('/v0/signup', {
+      fetch('http://localhost:3010/v0/signup', {
         method: 'POST',
         body: JSON.stringify(user),
         headers: {

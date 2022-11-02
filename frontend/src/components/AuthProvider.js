@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import {createContext, useContext} from 'react';
 import {useNavigate, useLocation} from 'react-router-dom';
 import {useLocalStorage} from './UseLocalStorage';

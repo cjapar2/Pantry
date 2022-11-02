@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import * as React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {FormControl, FormGroup, TextField, Typography} from '@mui/material';
@@ -31,7 +33,7 @@ function Login() {
   const onLoginSubmit = (event) => {
     event.preventDefault();
 
-    fetch('/v0/authenticate', {
+    fetch('http://localhost:3010/v0/authenticate', {
       method: 'POST',
       body: JSON.stringify(user),
       headers: {

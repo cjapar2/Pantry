@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, {useState} from 'react';
 import './Rightbar.css';
 
@@ -13,7 +15,7 @@ export default function Sidebar() {
   const nameSubmit = (event) => {
     event.preventDefault();
     const nameObject = {'name': name};
-    fetch('http://localhost:3010/v0/foodlist', {
+    fetch('/v0/foodlist', {
       method: 'POST',
       body: JSON.stringify(nameObject),
       headers: {
