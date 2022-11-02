@@ -17,12 +17,8 @@ const pool = new Pool({
 
 exports.authenticate = async (req, res) => {
   const user = await db.getUser(req.body);
-  // console.log(req.body);
-  // console.log(user.password);
-  // console.log(user);
 
   if (user.length != 0 && bcrypt.compareSync(req.body.password, user[0].usr.password)) {
-    // console.log('test');
     const accessToken = jwt.sign(
       {email: user[0].usr.email}, 
       secrets.accessToken, {
@@ -31,7 +27,6 @@ exports.authenticate = async (req, res) => {
       });
     res.status(200).json({name: user[0].usr.name, accessToken: accessToken});
   } else {
-    // console.log('fail');
     res.status(401).send();
   }
 };

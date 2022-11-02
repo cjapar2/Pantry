@@ -47,8 +47,7 @@ exports.selectUsers = async (body) => {
 };
 
 exports.getUser = async (body) => {
-  console.log(body);
-  const email = body.username;
+  const email = body.email;
   const query = {
     text: "SELECT * FROM loginTable WHERE usr->>'email' = $1",
     values: [email],

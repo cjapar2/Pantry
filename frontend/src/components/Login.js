@@ -12,13 +12,13 @@ import {useAuth} from './AuthProvider';
  * @return {object} JSX
  */
 function Login() {
-  const [user, setUser] = React.useState({username: '', password: ''});
+  const [user, setUser] = React.useState({email: '', password: ''});
   const authentication = useAuth();
   const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const {value, name} = event.target;
-    console.log(value, name);
+    // console.log(value, name);
     const u = user;
     u[name] = value;
     setUser(u);
@@ -28,11 +28,10 @@ function Login() {
     navigate('/createaccount');
   };
 
-  // Show error to user -> Don't think if statement for response is firing.
-  // Double-check authentication stuff
   const onLoginSubmit = (event) => {
     event.preventDefault();
-    fetch('/authenticate', {
+
+    fetch('/v0/authenticate', {
       method: 'POST',
       body: JSON.stringify(user),
       headers: {
@@ -55,10 +54,7 @@ function Login() {
   };
 
   return (
-    // if (authentication.user) {navigate('/mainlist');}
-    <Box className='outerContainer' sx={{
-      //  border: 'solid',
-    }}>
+    <Box className='outerContainer'>
       <Box sx={{
         width: '50%',
         display: 'flex',
@@ -74,8 +70,8 @@ function Login() {
                 fontSize: '26px',
                 pb: '25px',
               }}>Welcome to Pantry</Typography>
-              <TextField label='Username' size='small'
-                onChange={handleInputChange} name='username'
+              <TextField label='Email' size='small'
+                onChange={handleInputChange} name='email'
                 sx={{
                   alignSelf: 'center',
                   pb: '20px',
