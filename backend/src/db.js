@@ -69,14 +69,13 @@ exports.selectFoodItems = async (body) => {
 };
 
 exports.insertFood = async (body) => {
-  const searchUser = await this.searchUser(body.email);
+  const searchUser = await this.searchUser(body);
   if (!searchUser) {
     const insert = `INSERT INTO foodTable(item, amount, purchaseDate, notes) VALUES ($1, $2, $3, $4);`;
     const query = {
       text: insert,
       values: [body.item, body.amount, body.purchaseDate, body.notes],
     };
-    // console.log(query);
     await pool.query(query);
     return 201;
   } else {

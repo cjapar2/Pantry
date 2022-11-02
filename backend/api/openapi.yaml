@@ -136,7 +136,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NewUser'
+                $ref: '#/components/schemas/NewFoodItem'
         409:
           description: Food already there
         default:
@@ -229,26 +229,28 @@ components:
     FoodItem:
       type: object
       properties:
-        name:
+        item:
           type: string
         amount:
+          type: integer
+        purchaseDate:
           type: string
-        date:
-          type: string
-        description:
+          pattern: '^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$'
+        notes:
           type: string
         
     NewFoodItem:
       type: object
       properties:
-        name:
+        item:
           type: string
         amount:
+          type: integer
+        purchaseDate:
           type: string
-        date:
-          type: string
-        description:
+          pattern: '^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$'
+        notes:
           type: string
       required:
-        - name
-        - date
+        - item
+        - purchaseDate

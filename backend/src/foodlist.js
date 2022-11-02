@@ -8,7 +8,6 @@ exports.getFood = async (req, res) => {
 exports.postFood = async (req, res) => {
     const success = await db.insertFood(req.body);
     if (success === 201) {
-        console.log('test');
         res.status(201).send(req.body);
     } else {
         res.status(409).send();
