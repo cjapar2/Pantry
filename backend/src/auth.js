@@ -4,9 +4,6 @@ const secrets = require('./secrets.json');
 var bcrypt = require('bcrypt');
 var db = require('./db');
 
-//const secrets
-// const db = require('./db');
-
 const pool = new Pool({
   host: 'localhost',
   port: 5432,

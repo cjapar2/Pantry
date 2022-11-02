@@ -1,5 +1,6 @@
 // const e = require('express');
 const {Pool} = require('pg');
+var bcrypt = require('bcrypt');
 
 const pool = new Pool({
   host: 'localhost',
@@ -13,6 +14,8 @@ exports.insertUser = async (body) => {
   const searchUser = await this.searchUser(body.email);
   // console.log('searching user returned ' + searchUser);
   if (!searchUser) {
+    const saltRounds = 10;
+    body.password = bcrypt.hashSync(body.password, saltRounds);
     const insert = `INSERT INTO loginTable(usr) VALUES ($1);`;
     const query = {
       text: insert,

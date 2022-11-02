@@ -4,7 +4,7 @@ const db = require('./db');
 exports.postUser = async (req, res) => {
   const success = await db.insertUser(req.body);
   if (success === 201) {
-    res.status(201).send('Successfully created account');
+    res.status(201).send(req.body);
   } else {
     res.status(409).send('Email Already Exists');
   }
