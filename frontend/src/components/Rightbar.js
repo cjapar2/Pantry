@@ -31,7 +31,7 @@ export default function Sidebar() {
   const nameSubmit = (event) => {
     event.preventDefault();
     // const itemObject = {item, amount, purchasedate, notes};
-    const itemObject = {"item":item,"amount":amount,"purchaseDate":purchaseDate,"notes":notes};
+    const itemObject = {"item":item,"amount":parseInt(amount),"purchaseDate":purchaseDate,"notes":notes};
     fetch('http://localhost:3010/v0/foodlist', {
       method: 'POST',
       body: JSON.stringify(itemObject),
