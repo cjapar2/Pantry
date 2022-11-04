@@ -28,6 +28,26 @@ export default function Sidebar() {
   const [notes, setNotes] = useState('');
   const authentication = useAuth();
 
+  const checkList = (event) => {
+    fetch('http://localhost:3010/v0/foodlist', {
+      method: 'GET',
+      headers: {
+        'accept': 'application/json',
+        'Authorization': `Bearer ${authentication.getToken()}`,
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      if (!res.ok) {
+        throw res;
+      }
+      return res.json();
+    })
+    .then((json) => {
+      console.log(json);
+    })
+  }
+
   const nameSubmit = (event) => {
     event.preventDefault();
     // const itemObject = {item, amount, purchasedate, notes};
@@ -96,7 +116,7 @@ export default function Sidebar() {
               onChange={(e) => setNotes(e.target.value)}/></li>
              
             <li className='buttonLi'>
-              <button onClick={addItemButton}
+              <button onClick={checkList}
                 className='addItemButton'>Add Item</button>
             </li>
           </ul>
@@ -112,6 +132,9 @@ export default function Sidebar() {
  * @return {object} True or False
 */
 function addItemButton(itemObj) {
+  console.log("button pushed");
+
+  /*
   if (!document.getElementById('itemName').value) {
     console.log('Name empty');
   } else {
@@ -139,4 +162,5 @@ function addItemButton(itemObj) {
     console.log(document.getElementById('itemDesc').value);
   }
   return false;
+  */
 }
