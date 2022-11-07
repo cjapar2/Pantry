@@ -65,7 +65,7 @@ exports.selectFoodItems = async (body) => {
     values: []
   };
   const {rows} = await pool.query(query);
-  return {rows};
+  return {rows}
 };
 
 exports.insertFood = async (body) => {

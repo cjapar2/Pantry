@@ -3,7 +3,6 @@
 import React, {useState} from 'react';
 import './Rightbar.css';
 import {useAuth} from './AuthProvider';
-import {dataBaseContext} from './App';
 
 /**
  * Simple component with no state.
@@ -69,7 +68,7 @@ export default function Sidebar() {
         return res.json();
       })
       .then((json) => {
-        setData(!data);
+        addItemButton(json);
       })
       .catch((err) => {
         console.log('err', err);
@@ -158,7 +157,7 @@ export default function Sidebar() {
 function addItemButton(itemObj) {
   console.log("button pushed");
 
-  
+  /*
   if (!document.getElementById('itemName').value) {
     console.log('Name empty');
   } else {
@@ -186,5 +185,5 @@ function addItemButton(itemObj) {
     console.log(document.getElementById('itemDesc').value);
   }
   return false;
-  
+  */
 }

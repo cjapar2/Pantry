@@ -17,7 +17,6 @@ import './Mainlist.css';
  *
  * @return {object} maintest
  */
-
 export default function Mainlist() {
   return (
     <div className='mainList'>
