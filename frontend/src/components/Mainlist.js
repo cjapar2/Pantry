@@ -1,7 +1,12 @@
 /* eslint-disable */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {useAuth} from './AuthProvider';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 import './Mainlist.css';
+import {dataBaseContext} from './App';
 
 /*
       <button onClick={addItemButton} className='addItemButton'>+</button>
@@ -17,11 +22,51 @@ import './Mainlist.css';
  *
  * @return {object} maintest
  */
+
 export default function Mainlist() {
+  const context = React.useContext(dataBaseContext);
+  const data = context.dataChanged;
+  const [itemList, setItemList] = useState([]);
+  const authentication = useAuth();
+
+  async function checkList(event) {
+
+    fetch('http://localhost:3010/v0/foodlist', {
+      method: 'GET',
+      headers: {
+        'accept': 'application/json',
+        'Authorization': `Bearer ${authentication.getToken()}`,
+      },
+    })
+    .then((res) => {
+      if (!res.ok) {
+        throw res;
+      }
+      return res.json();
+    })
+    .then((json) => {
+      setItemList(json.rows);
+    })
+  }
+
+  useEffect(() => {
+    //  console.log('test');
+      checkList();
+  }, [data])
+
+
   return (
     <div className='mainList'>
       <p className='listName'>List Name</p>
-      <ul id="mainItemList"></ul>
+      <div>
+        <List>
+          {itemList.map((object, index) => (
+            <ListItem button key={index}>
+              <ListItemText primary={object.item}/>
+            </ListItem>
+          ))}
+        </List>
+      </div>
     </div>
   );
 }
