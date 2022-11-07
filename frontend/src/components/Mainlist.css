@@ -83,3 +83,20 @@ body {
 .mainList a{
   text-decoration: none;
 }
+
+.mainList .updateList{
+  position: relative;
+  left: 200px;
+}
+
+.mainList .leftListItem{
+  display: inline-block;
+  width: 80%;
+  margin: 0;
+}
+
+.mainList .rightListItem{
+  margin: 0;
+  text-align: right;
+  display: inline-block;
+}

@@ -74,3 +74,8 @@
 .rightbar a{
   text-decoration: none;
 }
+
+.rightbar .tagLabel{
+  text-align: left;
+  display: block;
+}
