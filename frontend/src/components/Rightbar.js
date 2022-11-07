@@ -101,6 +101,27 @@ export default function Sidebar() {
               placeholder='Write a description for your item...'
               onChange={(e) => setNotes(e.target.value)}/></li>
              
+            <label className='tagBox'>
+              <input type="checkbox" />
+                Produce
+            </label>
+            <label className='tagBox'>
+              <input type="checkbox" />
+                Produce
+            </label>
+            <label className='tagBox'>
+              <input type="checkbox" />
+                Produce
+            </label>
+            <label className='tagBox'>
+              <input type="checkbox" />
+                Produce
+            </label>
+            <label className='tagBox'>
+              <input type="checkbox" />
+                Produce
+            </label>
+
             <li className='buttonLi'>
               <button
                 className='addItemButton'>Add Item</button>
