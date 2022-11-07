@@ -3,6 +3,7 @@
 import React, {useState} from 'react';
 import './Rightbar.css';
 import {useAuth} from './AuthProvider';
+import {dataBaseContext} from './App';
 
 /**
  * Simple component with no state.
@@ -28,6 +29,26 @@ export default function Sidebar() {
   const [notes, setNotes] = useState('');
   const authentication = useAuth();
 
+  const checkList = (event) => {
+    fetch('http://localhost:3010/v0/foodlist', {
+      method: 'GET',
+      headers: {
+        'accept': 'application/json',
+        'Authorization': `Bearer ${authentication.getToken()}`,
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      if (!res.ok) {
+        throw res;
+      }
+      return res.json();
+    })
+    .then((json) => {
+      console.log(json);
+    })
+  }
+
   const nameSubmit = (event) => {
     event.preventDefault();
     // const itemObject = {item, amount, purchasedate, notes};
@@ -48,7 +69,7 @@ export default function Sidebar() {
         return res.json();
       })
       .then((json) => {
-        addItemButton(json);
+        setData(!data);
       })
       .catch((err) => {
         console.log('err', err);
@@ -119,7 +140,8 @@ export default function Sidebar() {
 
                          
             <li className='buttonLi'>
-              <button className='addItemButton'>Add Item</button>
+              <button onClick={checkList}
+                className='addItemButton'>Add Item</button>
             </li>
           </ul>
         </div>
@@ -136,7 +158,7 @@ export default function Sidebar() {
 function addItemButton(itemObj) {
   console.log("button pushed");
 
-  /*
+  
   if (!document.getElementById('itemName').value) {
     console.log('Name empty');
   } else {
@@ -164,5 +186,5 @@ function addItemButton(itemObj) {
     console.log(document.getElementById('itemDesc').value);
   }
   return false;
-  */
+  
 }

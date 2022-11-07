@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 // import Box from '@mui/material/Box';
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
 import Login from './Login';
@@ -18,8 +18,12 @@ import Rightbar from './Rightbar';
  *
  * @return {object} JSX
  */
+
+ const dataBaseContext = React.createContext();
+
 function App() {
   const authentication = useAuth();
+  const [dataChanged, setDataChanged] = React.useState(false);
   const data = useLocalStorage('user', null);
   let user = false;
 
@@ -31,19 +35,24 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Routes>
-          <Route path='/createaccount' element={<CreateAccount/>} />
-          <Route path='/' element=
-            {user ? <Navigate to='/mainlist'/> : <Login/>}/>
-          <Route element={<ProtectedRoute/>}>
-            <Route path='/mainlist' element={<div>
-              <Mainlist/><Navbar/><Sidebar/><Rightbar/>
-            </div>} />
-          </Route>
-        </Routes>
+        <dataBaseContext.Provider value={{dataChanged, setDataChanged}}>
+          <Routes>
+            <Route path='/createaccount' element={<CreateAccount/>} />
+            <Route path='/' element=
+              {user ? <Navigate to='/mainlist'/> : <Login/>}/>
+            <Route element={<ProtectedRoute/>}>
+              <Route path='/mainlist' element={<div>
+                <Mainlist/><Navbar/><Sidebar/><Rightbar/>
+              </div>} />
+            </Route>
+          </Routes>
+        </dataBaseContext.Provider>
       </AuthProvider>
     </BrowserRouter>
   );
 }
 
 export default App;
+export {
+  dataBaseContext,
+};
