@@ -72,10 +72,10 @@ exports.insertFood = async (body) => {
   const searchUser = await this.searchUser(body);
   console.log('adding:', body);
   if (!searchUser) {
-    const insert = `INSERT INTO foodTable(item, amount, purchaseDate, notes) VALUES ($1, $2, $3, $4);`;
+    const insert = `INSERT INTO foodTable(item, amount, purchaseDate, notes, tags) VALUES ($1, $2, $3, $4, $5);`;
     const query = {
       text: insert,
-      values: [body.item, body.amount, body.purchaseDate, body.notes],
+      values: [body.item, body.amount, body.purchaseDate, body.notes, body.tags],
     };
     await pool.query(query);
     return 201;

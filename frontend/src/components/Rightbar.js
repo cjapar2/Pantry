@@ -27,6 +27,10 @@ export default function Sidebar() {
   const [amount, setAmount] = useState(0);
   const [purchaseDate, setPurchaseDate] = useState(formattedDate.toString()); // convert date type to string type
   const [notes, setNotes] = useState('');
+  const [tags, setTags] = useState({});
+  const updateTags = (tag, bool) => {
+    tags[tag] = bool;
+  };
   const authentication = useAuth();
 
   //Context
@@ -36,8 +40,15 @@ export default function Sidebar() {
 
   const nameSubmit = (event) => {
     event.preventDefault();
-    // const itemObject = {item, amount, purchasedate, notes};
-    const itemObject = {"item":item,"amount":parseInt(amount),"purchaseDate":purchaseDate,"notes":notes};
+    const itemObject = {
+      "item": item,
+      "amount": parseInt(amount),
+      "purchaseDate": purchaseDate,
+      "notes": notes,
+      "tags": tags
+    };
+    console.log('itemObject');
+    console.log(itemObject);
     fetch('http://localhost:3010/v0/foodlist', {
       method: 'POST',
       body: JSON.stringify(itemObject),
@@ -62,6 +73,7 @@ export default function Sidebar() {
       });
   };
 
+  const tagNames = ["Shared", "Dairy", "Meat", "Produce", "Spice"];
   return (
     <form onSubmit={nameSubmit}>
       <div className='rightbar'>
@@ -101,26 +113,7 @@ export default function Sidebar() {
               placeholder='Write a description for your item...'
               onChange={(e) => setNotes(e.target.value)}/></li>
              
-            <label className='tagBox'>
-              <input type="checkbox" />
-                Produce
-            </label>
-            <label className='tagBox'>
-              <input type="checkbox" />
-                Produce
-            </label>
-            <label className='tagBox'>
-              <input type="checkbox" />
-                Produce
-            </label>
-            <label className='tagBox'>
-              <input type="checkbox" />
-                Produce
-            </label>
-            <label className='tagBox'>
-              <input type="checkbox" />
-                Produce
-            </label>
+            {createTagButtons(tagNames, updateTags)}
 
             <li className='buttonLi'>
               <button
@@ -131,6 +124,26 @@ export default function Sidebar() {
       </div>
     </form>
   );
+}
+
+function createTagButtons(tagNames, updateTags) {
+  const rows = [];
+
+  for (let i = 0; i < tagNames.length; i++) {
+    const name = tagNames[i];
+    rows.push(
+      <label className='tagBox' key={name}>
+        <input type="checkbox"
+          key={name}
+          id={"tag" + name}
+          className="tag"
+          onChange={(e) => updateTags(name, e.target.checked)}
+        />
+          {name}
+      </label>
+    );
+  }
+  return rows;
 }
 
 /**

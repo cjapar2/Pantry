@@ -34,15 +34,13 @@ app.use(
 app.get('/v0/dummy', dummy.get);
 
 // Your routes go here
+// Signup Routes
 app.get('/v0/signup', login.getUsers);
 app.post('/v0/signup', login.postUser);
 
-//
-
-// Gets
+// Foodlist Routes
 app.get('/v0/foodlist', auth.check, foodlist.getFood);
 app.post('/v0/foodlist', auth.check, foodlist.postFood);
-//
 
 app.use((err, req, res, next) => {
   res.status(err.status).json({
