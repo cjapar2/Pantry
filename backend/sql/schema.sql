@@ -8,11 +8,6 @@ DROP TABLE IF EXISTS loginTable;
 
 CREATE TABLE loginTable(usr jsonb PRIMARY KEY);
 
-CREATE TABLE foodTable(
-    id SERIAL PRIMARY KEY,
-    item VARCHAR(256),
-    amount INT,
-    purchaseDate DATE, -- YYYY-MM-DD
-    notes VARCHAR(1000), -- 1000 is the max # of characters
-    tags jsonb
-);
+DROP TABLE IF EXISTS foodTable;
+
+CREATE TABLE foodTable(id SERIAL PRIMARY KEY, item VARCHAR(256), amount INT, purchaseDate DATE, notes VARCHAR(1000), tags jsonb);

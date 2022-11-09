@@ -229,6 +229,8 @@ components:
     FoodItem:
       type: object
       properties:
+        id:
+          type: integer
         item:
           type: string
         amount:
