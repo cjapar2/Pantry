@@ -70,7 +70,7 @@ exports.selectFoodItems = async (body) => {
 
 exports.insertFood = async (body) => {
   const searchUser = await this.searchUser(body);
-  console.log('adding:', body);
+  // console.log('adding:', body);
   if (!searchUser) {
     const insert = `INSERT INTO foodTable(item, amount, purchaseDate, notes, tags) VALUES ($1, $2, $3, $4, $5);`;
     const query = {

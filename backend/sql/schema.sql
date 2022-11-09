@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS loginTable;
 CREATE TABLE loginTable(usr jsonb PRIMARY KEY);
 
 CREATE TABLE foodTable(
+    id SERIAL PRIMARY KEY,
     item VARCHAR(256),
     amount INT,
     purchaseDate DATE, -- YYYY-MM-DD
