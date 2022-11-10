@@ -54,7 +54,7 @@ export default function Mainlist() {
     .then((json) => {
       const data = json.rows;
       data.sort((a, b) => a.id < b.id ? -1 : 1);
-      console.log(json.rows);
+      // console.log(json.rows);
       setItemList(json.rows);
     })
   }
@@ -75,43 +75,48 @@ export default function Mainlist() {
     <div className='mainList'>
       <p className='listName'>List Name</p>
       <div>
-      <List sx={{ mt: 5 }} component={Stack} direction="row" spacing={0}>
-        <ListItem>
+      <List key={'toolbar'} sx={{ mt: 5 }} component={Stack} direction="row">
+        <ListItem key={'item'}>
           <ListItemText primary="Item" />
         </ListItem>
-        <ListItem>
+        <ListItem key={'amount'}>
           <ListItemText primary="Amount" />
         </ListItem>
-        <ListItem>
+        <ListItem key={'date'}>
           <ListItemText primary="Date Purchased" />
         </ListItem>
-        <ListItem>
+        <ListItem key={'notes'}>
           <ListItemText primary="Notes" />
         </ListItem>
-        <ListItem>
+        <ListItem key={'tags'}>
           <ListItemText primary="Tags" />
+        </ListItem>
+        <ListItem key={'edit'}>
+          <ListItemButton disabled={true}/>
         </ListItem>
       </List>
       {itemList.map((object, index) => (
-            <List component={Stack} direction="row" spacing={0}>
-              <ListItem button key={index + "name"}>
+            <List component={Stack} direction="row" spacing={0}
+              key={String(object.id).concat('list')}>
+              <ListItem key={String(object.id).concat('item')}>
                 <ListItemText primary={object.item} />
               </ListItem>
-              <ListItem button key={index + "amount"}>
+              <ListItem key={String(object.id).concat('amount')}>
                 <ListItemText primary={object.amount} />
               </ListItem>
-              <ListItem button key={index + "date"}>
+              <ListItem key={String(object.id).concat('date')}>
                 <ListItemText primary={formatDate(object.purchasedate)} />
               </ListItem> 
-              <ListItem button key={index + "notes"}>
+              <ListItem key={String(object.id).concat('notes')}>
                 <ListItemText primary={object.notes} />
               </ListItem>
-              <ListItem button key={index}>
+              <ListItem key={String(object.id).concat('tags')}>
                 <ListItemText primary= {printTags(object.tags)} />
               </ListItem>
-              <ListItem key={index}>
-                  <ListItemButton role={'button'} color={'blue'} onClick={() => {handleClickOpen(object)}}>
-                  <ListItemText primary={'Edit'}/>
+              <ListItem key={String(object.id).concat('edit')}>
+                  <ListItemButton role={'button'} color='blue' key={'editButton'}
+                     onClick={() => {handleClickOpen(object)}}>
+                  <ListItemText primary={'Edit'} key={'text'}/>
                   </ListItemButton>
                 </ListItem>
            </List>

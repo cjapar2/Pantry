@@ -19,11 +19,10 @@ export default function EditDialog() {
   const setData = dataContext.setDataChanged;
   const data = dataContext.dataChanged;
   const [newItem, setNewItem] = React.useState(
-    {item: editItem.item, amount: editItem.amount, purchaseDate: editItem.purchasedate,
+    {item: editItem.item, amount: editItem.amount, purchaseDate: formatDate(editItem.purchasedate),
       notes: editItem.notes, tags: editItem.tags});
   const authentication = useAuth();
   const tagNames = ['Shared', 'Dairy', 'Meat', 'Produce', 'Spice'];
-  
 
   const updateTags = (tag, bool) => {
     const item = newItem;
@@ -47,6 +46,13 @@ export default function EditDialog() {
     }
     setNewItem(item);
   };
+
+  function formatDate(date_string){
+    let date = new Date(date_string);
+    const offset = date.getTimezoneOffset();
+    date = new Date(date.getTime() - (offset*60*1000));
+    return date.toISOString().split('T')[0];
+  }
 
   function createTagButtons(tagNames, updateTags) {
     const rows = [];
@@ -115,7 +121,7 @@ export default function EditDialog() {
 
             <Grid item>
               <Typography>Date Purchased</Typography>
-              <Input type={'date'} name='purchaseDate' defaultValue={editItem.purchasedate}
+              <Input type={'date'} name='purchaseDate' defaultValue={newItem.purchaseDate}
                 placeholder='Input an item to add...' onChange={handleInputChange}/>
             </Grid>
 
