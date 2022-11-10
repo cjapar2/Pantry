@@ -15,6 +15,6 @@ exports.postFood = async (req, res) => {
 };
 
 exports.putFood = async (req, res) => {
-    await db.editFood(req.params.id, req.body);
+    await db.updateFood(req.params.id, req.body);
     res.status(201).send(req.body);
 }
