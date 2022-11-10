@@ -7,6 +7,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import './Mainlist.css';
 import {dataBaseContext} from './App';
+import { ListItemButton } from '@mui/material';
+import EditDialog from './EditDialog';
 
 /*
       <button onClick={addItemButton} className='addItemButton'>+</button>
@@ -23,14 +25,18 @@ import {dataBaseContext} from './App';
  * @return {object} maintest
  */
 
+ const editItemContext = React.createContext();
+
 export default function Mainlist() {
   const context = React.useContext(dataBaseContext);
   const data = context.dataChanged;
   const [itemList, setItemList] = useState([]);
+  const [editItem, setEditItem] = React.useState({});
+  // id: 0, item: '', amount: 0, purchaseDate: '', notes: '', tags: {}
+  const [open, setOpen] = React.useState(false);
   const authentication = useAuth();
 
   async function checkList(event) {
-
     fetch('http://localhost:3010/v0/foodlist', {
       method: 'GET',
       headers: {
@@ -45,6 +51,9 @@ export default function Mainlist() {
       return res.json();
     })
     .then((json) => {
+      const data = json.rows;
+      data.sort((a, b) => a.id < b.id ? -1 : 1);
+      console.log(json.rows);
       setItemList(json.rows);
     })
   }
@@ -54,23 +63,36 @@ export default function Mainlist() {
       checkList();
   }, [data])
 
+  function handleClickOpen (item) {
+    setEditItem(item);
+    setOpen(true);
+  };
 
   return (
     <div className='mainList'>
       <p className='listName'>List Name</p>
       <div>
-        <List>
-          {itemList.map((object, index) => (
-            <ListItem button key={index}>
-              <ListItemText primary={object.item}/>
-            </ListItem>
-          ))}
-        </List>
+          <List>
+            {itemList.map((object, index) => (
+                <ListItem key={index}>
+                  <ListItemText primary={object.item}/>
+                  <ListItemButton role={'button'} color={'blue'} onClick={() => {handleClickOpen(object)}}>
+                  <ListItemText primary={'Edit'}/>
+                  </ListItemButton>
+                </ListItem>
+            ))}
+          </List>
+          <editItemContext.Provider value={{open, setOpen, editItem}}>
+            {open? (<EditDialog/>) : null}
+          </editItemContext.Provider>
       </div>
     </div>
   );
 }
 
+export {
+  editItemContext,
+};
 
 /**
  * Adds an item to the list

@@ -41,6 +41,7 @@ app.post('/v0/signup', login.postUser);
 // Foodlist Routes
 app.get('/v0/foodlist', auth.check, foodlist.getFood);
 app.post('/v0/foodlist', auth.check, foodlist.postFood);
+app.put('/v0/foodlist/:id', auth.check, foodlist.putFood);
 
 app.use((err, req, res, next) => {
   res.status(err.status).json({

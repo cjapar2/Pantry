@@ -132,13 +132,49 @@ paths:
 
       responses:
         201:
-          description: Successfully added account 
+          description: Successfully added item 
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NewFoodItem'
         409:
           description: Food already there
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnexpectedError'
+
+  /foodlist/{id}:
+    put:
+      security:
+        - bearerAuth: []
+      description: Edit a foodlist item
+      parameters:
+      - name: id
+        in: path
+        description: Id of food item
+        required: true
+        schema:
+          type: integer
+        allowReserved: true
+      requestBody:
+        description: Food item to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewFoodItem'
+
+      responses:
+        201:
+          description: Successfully added item 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewFoodItem'
+                
         default:
           description: unexpected error
           content:

@@ -83,3 +83,15 @@ exports.insertFood = async (body) => {
     return 409;
   }
 };
+
+exports.editFood = async (id, body) => {
+  const {item, amount, purchaseDate, notes, tags} = body;
+  const edit = `UPDATE foodtable SET item = $1, amount = $2, purchaseDate = $3, notes = $4, tags = $5 WHERE id = $6`;
+  const query = {
+    text: edit,
+    values: [item, amount, purchaseDate, notes, tags, id]
+  }
+
+  const {rows} = await pool.query(query);
+  return rows;
+}
