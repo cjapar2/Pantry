@@ -29,7 +29,7 @@ export default function Sidebar() {
   const [notes, setNotes] = useState('');
   const [tags, setTags] = useState({});
   const updateTags = (tag, bool) => {
-    bool ? tags[tag] = true : delete tags[tag];
+    tags[tag] = bool;
   };
   const authentication = useAuth();
 
