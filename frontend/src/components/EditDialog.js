@@ -27,7 +27,7 @@ export default function EditDialog() {
   const updateTags = (tag, bool) => {
     const item = newItem;
     const tags = item['tags'];
-    tags[tag] = bool;
+    bool ? tags[tag] = true : delete tags[tag];
     setNewItem(item);
   };
 
