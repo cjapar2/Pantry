@@ -34,5 +34,3 @@ test('GET Dummy', async () => {
       expect(res.body.message.search(/Database created/)).toBeGreaterThan(60);
     });
 });
-
-
