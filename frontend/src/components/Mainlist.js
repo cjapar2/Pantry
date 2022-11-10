@@ -5,6 +5,7 @@ import {useAuth} from './AuthProvider';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import Stack from '@mui/material/Stack';
 import './Mainlist.css';
 import {dataBaseContext} from './App';
 import { ListItemButton } from '@mui/material';
@@ -68,26 +69,76 @@ export default function Mainlist() {
     setOpen(true);
   };
 
+
+
   return (
     <div className='mainList'>
       <p className='listName'>List Name</p>
       <div>
-          <List>
-            {itemList.map((object, index) => (
-                <ListItem key={index}>
-                  <ListItemText primary={object.item}/>
+      <List sx={{ mt: 5 }} component={Stack} direction="row" spacing={0}>
+        <ListItem>
+          <ListItemText primary="Item" />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Amount" />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Date Purchased" />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Notes" />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Tags" />
+        </ListItem>
+      </List>
+      {itemList.map((object, index) => (
+            <List component={Stack} direction="row" spacing={0}>
+              <ListItem button key={index + "name"}>
+                <ListItemText primary={object.item} />
+              </ListItem>
+              <ListItem button key={index + "amount"}>
+                <ListItemText primary={object.amount} />
+              </ListItem>
+              <ListItem button key={index + "date"}>
+                <ListItemText primary={formatDate(object.purchasedate)} />
+              </ListItem> 
+              <ListItem button key={index + "notes"}>
+                <ListItemText primary={object.notes} />
+              </ListItem>
+              <ListItem button key={index}>
+                <ListItemText primary= {printTags(object.tags)} />
+              </ListItem>
+              <ListItem key={index}>
                   <ListItemButton role={'button'} color={'blue'} onClick={() => {handleClickOpen(object)}}>
                   <ListItemText primary={'Edit'}/>
                   </ListItemButton>
                 </ListItem>
-            ))}
-          </List>
+           </List>
+          ))}
           <editItemContext.Provider value={{open, setOpen, editItem}}>
             {open? (<EditDialog/>) : null}
           </editItemContext.Provider>
       </div>
     </div>
   );
+}
+
+function printTags(objectTags){
+  console.log(objectTags)
+  console.log(Object.keys(objectTags))
+  var result = "";
+  Object.keys(objectTags).forEach((key) =>{
+    result = result + key + ", "
+  });
+  result = result.replace(/,\s*$/, "");
+  return result
+}
+
+function formatDate(date_string){
+  let date = new Date(date_string);
+  let dateMDY = `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`;
+  return dateMDY
 }
 
 export {
