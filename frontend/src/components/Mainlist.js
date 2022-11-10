@@ -5,8 +5,11 @@ import {useAuth} from './AuthProvider';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import Stack from '@mui/material/Stack';
 import './Mainlist.css';
 import {dataBaseContext} from './App';
+import { ListItemButton } from '@mui/material';
+import EditDialog from './EditDialog';
 
 /*
       <button onClick={addItemButton} className='addItemButton'>+</button>
@@ -23,14 +26,18 @@ import {dataBaseContext} from './App';
  * @return {object} maintest
  */
 
+ const editItemContext = React.createContext();
+
 export default function Mainlist() {
   const context = React.useContext(dataBaseContext);
   const data = context.dataChanged;
   const [itemList, setItemList] = useState([]);
+  const [editItem, setEditItem] = React.useState({});
+  // id: 0, item: '', amount: 0, purchaseDate: '', notes: '', tags: {}
+  const [open, setOpen] = React.useState(false);
   const authentication = useAuth();
 
   async function checkList(event) {
-
     fetch('http://localhost:3010/v0/foodlist', {
       method: 'GET',
       headers: {
@@ -45,6 +52,9 @@ export default function Mainlist() {
       return res.json();
     })
     .then((json) => {
+      const data = json.rows;
+      data.sort((a, b) => a.id < b.id ? -1 : 1);
+      // console.log(json.rows);
       setItemList(json.rows);
     })
   }
@@ -54,23 +64,91 @@ export default function Mainlist() {
       checkList();
   }, [data])
 
+  function handleClickOpen (item) {
+    setEditItem(item);
+    setOpen(true);
+  };
+
+
 
   return (
     <div className='mainList'>
       <p className='listName'>List Name</p>
       <div>
-        <List>
-          {itemList.map((object, index) => (
-            <ListItem button key={index}>
-              <ListItemText primary={object.item}/>
-            </ListItem>
+      <List key={'toolbar'} sx={{ mt: 5 }} component={Stack} direction="row">
+        <ListItem key={'item'}>
+          <ListItemText primary="Item" />
+        </ListItem>
+        <ListItem key={'amount'}>
+          <ListItemText primary="Amount" />
+        </ListItem>
+        <ListItem key={'date'}>
+          <ListItemText primary="Date Purchased" />
+        </ListItem>
+        <ListItem key={'notes'}>
+          <ListItemText primary="Notes" />
+        </ListItem>
+        <ListItem key={'tags'}>
+          <ListItemText primary="Tags" />
+        </ListItem>
+        <ListItem key={'edit'}>
+          <ListItemButton disabled={true}/>
+        </ListItem>
+      </List>
+      {itemList.map((object, index) => (
+            <List component={Stack} direction="row" spacing={0}
+              key={String(object.id).concat('list')}>
+              <ListItem key={String(object.id).concat('item')}>
+                <ListItemText primary={object.item} />
+              </ListItem>
+              <ListItem key={String(object.id).concat('amount')}>
+                <ListItemText primary={object.amount} />
+              </ListItem>
+              <ListItem key={String(object.id).concat('date')}>
+                <ListItemText primary={formatDate(object.purchasedate)} />
+              </ListItem> 
+              <ListItem key={String(object.id).concat('notes')}>
+                <ListItemText primary={object.notes} />
+              </ListItem>
+              <ListItem key={String(object.id).concat('tags')}>
+                <ListItemText primary= {printTags(object.tags)} />
+              </ListItem>
+              <ListItem key={String(object.id).concat('edit')}>
+                  <ListItemButton role={'button'} color='blue' key={'editButton'}
+                     onClick={() => {handleClickOpen(object)}}>
+                  <ListItemText primary={'Edit'} key={'text'}/>
+                  </ListItemButton>
+                </ListItem>
+           </List>
           ))}
-        </List>
+          <editItemContext.Provider value={{open, setOpen, editItem}}>
+            {open? (<EditDialog/>) : null}
+          </editItemContext.Provider>
       </div>
     </div>
   );
 }
 
+function printTags(objectTags){
+  console.log(objectTags)
+  console.log(Object.keys(objectTags))
+  var result = "";
+  Object.keys(objectTags).forEach((key) =>{
+    result = result + key + ", "
+  });
+  result = result.replace(/,\s*$/, "");
+  return result
+}
+
+function formatDate(date_string){
+  let date = new Date(date_string);
+  let dateMDY = `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`;
+  return dateMDY
+}
+
+export {
+  editItemContext,
+};
 
 /**
  * Adds an item to the list

@@ -70,12 +70,15 @@ exports.selectFoodItems = async (body) => {
 
 exports.insertFood = async (body) => {
   const searchUser = await this.searchUser(body);
-  // console.log('adding:', body);
   if (!searchUser) {
-    const insert = `INSERT INTO foodTable(item, amount, purchaseDate, notes, tags) VALUES ($1, $2, $3, $4, $5);`;
+    // Change here (columns):
+    const columns = ['item', 'amount', 'purchaseDate', 'notes', 'tags'];
+    const values = columns.map((column, index) => `$` + (index+1));
+
+    const insert = `INSERT INTO foodTable(` + columns.toString() + `) VALUES (` + values.toString() + `);`;
     const query = {
       text: insert,
-      values: [body.item, body.amount, body.purchaseDate, body.notes, body.tags],
+      values: columns.map((column) => body[column]),
     };
     await pool.query(query);
     return 201;
@@ -83,3 +86,19 @@ exports.insertFood = async (body) => {
     return 409;
   }
 };
+
+exports.updateFood = async (id, body) => {
+  // Change here (columns):
+  const columns = ['item', 'amount', 'purchaseDate', 'notes', 'tags'];
+  const sets = columns.map((column, index) => column + ` = $` + (index+1));
+  console.log(sets.toString());
+
+  const update = `UPDATE foodtable SET ` + sets.toString() + ` WHERE id =` + id;
+  const query = {
+    text: update,
+    values: columns.map((column) => body[column]),
+  }
+
+  const {rows} = await pool.query(query);
+  return rows;
+}

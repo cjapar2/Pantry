@@ -13,3 +13,8 @@ exports.postFood = async (req, res) => {
         res.status(409).send();
     }
 };
+
+exports.putFood = async (req, res) => {
+    await db.updateFood(req.params.id, req.body);
+    res.status(201).send(req.body);
+}
