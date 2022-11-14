@@ -160,21 +160,40 @@ paths:
           type: integer
         allowReserved: true
       requestBody:
-        description: Food item to add
+        description: Food item to edit
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/NewFoodItem'
-
       responses:
-        201:
-          description: Successfully added item 
+        200:
+          description: Successfully edited item 
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NewFoodItem'
-                
+                $ref: '#/components/schemas/NewFoodItem'   
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnexpectedError'
+    delete:
+      security:
+        - bearerAuth: []
+      description: Delete a foodlist item
+      parameters:
+      - name: id
+        in: path
+        description: Id of food item
+        required: true
+        schema:
+          type: integer
+        allowReserved: true
+      responses:
+        204:
+          description: Successfully deleted item                 
         default:
           description: unexpected error
           content:
@@ -273,7 +292,7 @@ components:
           type: integer
         purchaseDate:
           type: string
-          pattern: '^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$'
+          format: date
         notes:
           type: string
         tags:
@@ -288,7 +307,7 @@ components:
           type: integer
         purchaseDate:
           type: string
-          pattern: '^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$'
+          format: date
         notes:
           type: string
         tags:

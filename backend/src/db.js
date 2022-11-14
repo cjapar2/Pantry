@@ -102,3 +102,13 @@ exports.updateFood = async (id, body) => {
   const {rows} = await pool.query(query);
   return rows;
 }
+
+exports.deleteFood = async (id) => {
+  console.log(id);
+  const update = `DELETE FROM foodtable WHERE id = $1`;
+  const query = {
+    text: update,
+    values: [id],
+  }
+  await pool.query(query);
+}
