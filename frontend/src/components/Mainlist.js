@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React, {useEffect, useState} from 'react';
+import Button from '@mui/material/Button';
 import {useAuth} from './AuthProvider';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -8,8 +9,12 @@ import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
 import './Mainlist.css';
 import {dataBaseContext} from './App';
-import { ListItemButton } from '@mui/material';
+import { Dialog, ListItemButton } from '@mui/material';
 import EditDialog from './EditDialog';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 
 /*
       <button onClick={addItemButton} className='addItemButton'>+</button>
@@ -35,6 +40,7 @@ export default function Mainlist() {
   const [editItem, setEditItem] = React.useState({});
   // id: 0, item: '', amount: 0, purchaseDate: '', notes: '', tags: {}
   const [open, setOpen] = React.useState(false);
+  const [openDelete, setOpenDelete] = React.useState(false);
   const authentication = useAuth();
 
   async function checkList(event) {
@@ -69,6 +75,16 @@ export default function Mainlist() {
     setOpen(true);
   };
 
+  function handleDeleteClick (){
+    setOpenDelete(true);
+    console.log(openDelete);
+  };
+
+  
+  function handleClose (){
+    setOpenDelete(false);
+  };
+
 
 
   return (
@@ -92,6 +108,9 @@ export default function Mainlist() {
           <ListItemText primary="Tags" />
         </ListItem>
         <ListItem key={'edit'}>
+          <ListItemButton disabled={true}/>
+        </ListItem>
+        <ListItem key={'space1'}>
           <ListItemButton disabled={true}/>
         </ListItem>
       </List>
@@ -118,12 +137,34 @@ export default function Mainlist() {
                      onClick={() => {handleClickOpen(object)}}>
                   <ListItemText primary={'Edit'} key={'text'}/>
                   </ListItemButton>
-                </ListItem>
+              </ListItem>
+              <ListItem >
+                  <ListItemButton role={'button'} color='blue' key={'deleteButton'}
+                     onClick={() => {handleDeleteClick()}}>
+                  <ListItemText primary={'Delete'} key={'text'}/>
+                  </ListItemButton>
+              </ListItem>
            </List>
           ))}
           <editItemContext.Provider value={{open, setOpen, editItem}}>
             {open? (<EditDialog/>) : null}
           </editItemContext.Provider>
+          <Dialog open={openDelete} onClose={handleClose}>
+            <DialogTitle>Delete Item</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Do you do want to delete this item?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={handleClose} color="primary" autoFocus>
+                Yes
+              </Button>
+            </DialogActions>
+          </Dialog>
       </div>
     </div>
   );
