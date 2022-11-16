@@ -38,6 +38,7 @@ export default function Mainlist() {
   const data = context.dataChanged;
   const [itemList, setItemList] = useState([]);
   const [editItem, setEditItem] = React.useState({});
+  const [deleteItem, setDeleteItem] = React.useState({});
   // id: 0, item: '', amount: 0, purchaseDate: '', notes: '', tags: {}
   const [open, setOpen] = React.useState(false);
   const [openDelete, setOpenDelete] = React.useState(false);
@@ -75,8 +76,9 @@ export default function Mainlist() {
     setOpen(true);
   };
 
-  function handleDeleteClick (){
+  function handleDeleteClick (item){
     setOpenDelete(true);
+    setDeleteItem(item);
     console.log(openDelete);
   };
 
@@ -84,6 +86,20 @@ export default function Mainlist() {
   function handleClose (){
     setOpenDelete(false);
   };
+
+  function deletingItem (){
+    fetch(`http://localhost:3010/v0/foodlist/${deleteItem.id}`, {
+      method: 'DELETE',
+      headers: {
+        'accept': 'application/json',
+        'Authorization': `Bearer ${authentication.getToken()}`,
+      },
+    })
+    .then(() => {
+      setOpenDelete(false);
+      checkList();
+    })
+  }
 
 
 
@@ -140,7 +156,7 @@ export default function Mainlist() {
               </ListItem>
               <ListItem >
                   <ListItemButton role={'button'} color='blue' key={'deleteButton'}
-                     onClick={() => {handleDeleteClick()}}>
+                     onClick={() => {handleDeleteClick(object)}}>
                   <ListItemText primary={'Delete'} key={'text'}/>
                   </ListItemButton>
               </ListItem>
@@ -153,14 +169,14 @@ export default function Mainlist() {
             <DialogTitle>Delete Item</DialogTitle>
             <DialogContent>
               <DialogContentText>
-                Do you do want to delete this item?
+                Do you do want to delete {deleteItem.item} from the list?
               </DialogContentText>
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose} color="primary">
                 Cancel
               </Button>
-              <Button onClick={handleClose} color="primary" autoFocus>
+              <Button onClick={deletingItem} color="primary" autoFocus>
                 Yes
               </Button>
             </DialogActions>
