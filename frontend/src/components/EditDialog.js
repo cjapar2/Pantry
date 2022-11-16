@@ -78,7 +78,7 @@ export default function EditDialog() {
   const updateItem = (event) => {
     event.preventDefault();
     
-    fetch(`http://localhost:3010/v0/foodlist/${editItem.id}`, {
+    fetch(`http://localhost:3010/v0/food/${editItem.id}`, {
       method: 'PUT',
       body: JSON.stringify(newItem),
       headers: {

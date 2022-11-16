@@ -71,8 +71,8 @@ test('Authorization Valid', async () => {
 
 
 
-test('GET /foodlist', async () => {
-  await request.get('/v0/foodlist')
+test('GET /food', async () => {
+  await request.get('/v0/food')
     .auth(token, {type: 'bearer'})
     .expect(200)
 });
@@ -84,8 +84,8 @@ const testFood =  {
   'notes': 'cookies for santa'
 };
 
-test('POST /foodlist', async () => {
-  await request.post('/v0/foodlist')
+test('POST /food', async () => {
+  await request.post('/v0/food')
     .auth(token, {type: 'bearer'})
     .send(testFood)
     .expect(201)

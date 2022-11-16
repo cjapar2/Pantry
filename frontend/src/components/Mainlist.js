@@ -45,7 +45,7 @@ export default function Mainlist() {
   const authentication = useAuth();
 
   async function checkList(event) {
-    fetch('http://localhost:3010/v0/foodlist', {
+    fetch('http://localhost:3010/v0/food', {
       method: 'GET',
       headers: {
         'accept': 'application/json',
@@ -88,7 +88,7 @@ export default function Mainlist() {
   };
 
   function deletingItem (){
-    fetch(`http://localhost:3010/v0/foodlist/${deleteItem.id}`, {
+    fetch(`http://localhost:3010/v0/food/${deleteItem.id}`, {
       method: 'DELETE',
       headers: {
         'accept': 'application/json',

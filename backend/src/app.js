@@ -7,9 +7,9 @@ const path = require('path');
 const OpenApiValidator = require('express-openapi-validator');
 
 const dummy = require('./dummy');
-const login = require('./login');
+const users = require('./users');
 const auth = require('./auth');
-const foodlist = require('./foodlist');
+const food = require('./food');
 
 const app = express();
 app.use(cors());
@@ -34,15 +34,15 @@ app.use(
 app.get('/v0/dummy', dummy.get);
 
 // Your routes go here
-// Signup Routes
-app.get('/v0/signup', login.getUsers);
-app.post('/v0/signup', login.postUser);
+// User Routes
+app.get('/v0/signup', users.getUsers);
+app.post('/v0/signup', users.postUser);
 
-// Foodlist Routes
-app.get('/v0/foodlist', auth.check, foodlist.getFood);
-app.post('/v0/foodlist', auth.check, foodlist.postFood);
-app.put('/v0/foodlist/:id', auth.check, foodlist.putFood);
-app.delete('/v0/foodlist/:id', auth.check, foodlist.deleteFood);
+// Food Routes
+app.get('/v0/food', auth.check, food.getFood);
+app.post('/v0/food', auth.check, food.postFood);
+app.put('/v0/food/:id', auth.check, food.putFood);
+app.delete('/v0/food/:id', auth.check, food.deleteFood);
 
 app.use((err, req, res, next) => {
   res.status(err.status).json({

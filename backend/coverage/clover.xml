@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1668060987560" clover="3.2.0">
-  <project timestamp="1668060987560" name="All files">
-    <metrics statements="130" coveredstatements="124" conditionals="18" coveredconditionals="11" methods="18" coveredmethods="18" elements="166" coveredelements="153" complexity="0" loc="130" ncloc="130" packages="2" files="7" classes="7"/>
+<coverage generated="1668602618701" clover="3.2.0">
+  <project timestamp="1668602618702" name="All files">
+    <metrics statements="155" coveredstatements="133" conditionals="18" coveredconditionals="11" methods="26" coveredmethods="20" elements="199" coveredelements="164" complexity="0" loc="155" ncloc="155" packages="2" files="7" classes="7"/>
     <package name="src">
-      <metrics statements="116" coveredstatements="110" conditionals="18" coveredconditionals="11" methods="16" coveredmethods="16"/>
-      <file name="app.js" path="C:\Users\CJ\Documents\CSE115A Assignments\Pantry\backend\src\app.js">
-        <metrics statements="28" coveredstatements="28" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <metrics statements="141" coveredstatements="119" conditionals="18" coveredconditionals="11" methods="24" coveredmethods="18"/>
+      <file name="app.js" path="C:\Users\Alanna\Documents\Homework\CSE 115A\Pantry\Pantry\backend\src\app.js">
+        <metrics statements="30" coveredstatements="30" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -31,11 +31,13 @@
         <line num="39" count="2" type="stmt"/>
         <line num="42" count="2" type="stmt"/>
         <line num="43" count="2" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
         <line num="45" count="2" type="stmt"/>
-        <line num="46" count="3" type="stmt"/>
-        <line num="53" count="2" type="stmt"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="48" count="3" type="stmt"/>
+        <line num="55" count="2" type="stmt"/>
       </file>
-      <file name="auth.js" path="C:\Users\CJ\Documents\CSE115A Assignments\Pantry\backend\src\auth.js">
+      <file name="auth.js" path="C:\Users\Alanna\Documents\Homework\CSE 115A\Pantry\Pantry\backend\src\auth.js">
         <metrics statements="22" coveredstatements="20" conditionals="8" coveredconditionals="6" methods="3" coveredmethods="3"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -60,8 +62,8 @@
         <line num="40" count="2" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
       </file>
-      <file name="db.js" path="C:\Users\CJ\Documents\CSE115A Assignments\Pantry\backend\src\db.js">
-        <metrics statements="39" coveredstatements="37" conditionals="6" coveredconditionals="3" methods="6" coveredmethods="6"/>
+      <file name="db.js" path="C:\Users\Alanna\Documents\Homework\CSE 115A\Pantry\Pantry\backend\src\db.js">
+        <metrics statements="56" coveredstatements="42" conditionals="6" coveredconditionals="3" methods="12" coveredmethods="8"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
@@ -95,14 +97,31 @@
         <line num="68" count="1" type="stmt"/>
         <line num="71" count="2" type="stmt"/>
         <line num="72" count="1" type="stmt"/>
-        <line num="74" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="73" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="75" count="1" type="stmt"/>
-        <line num="76" count="1" type="stmt"/>
-        <line num="80" count="1" type="stmt"/>
-        <line num="81" count="1" type="stmt"/>
-        <line num="83" count="0" type="stmt"/>
+        <line num="76" count="5" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="81" count="5" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="90" count="2" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="93" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="96" count="0" type="stmt"/>
+        <line num="97" count="0" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="102" count="0" type="stmt"/>
+        <line num="103" count="0" type="stmt"/>
+        <line num="106" count="2" type="stmt"/>
+        <line num="107" count="0" type="stmt"/>
+        <line num="108" count="0" type="stmt"/>
+        <line num="109" count="0" type="stmt"/>
+        <line num="113" count="0" type="stmt"/>
       </file>
-      <file name="dummy.js" path="C:\Users\CJ\Documents\CSE115A Assignments\Pantry\backend\src\dummy.js">
+      <file name="dummy.js" path="C:\Users\Alanna\Documents\Homework\CSE 115A\Pantry\Pantry\backend\src\dummy.js">
         <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -114,8 +133,8 @@
         <line num="21" count="2" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
       </file>
-      <file name="foodlist.js" path="C:\Users\CJ\Documents\CSE115A Assignments\Pantry\backend\src\foodlist.js">
-        <metrics statements="9" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+      <file name="food.js" path="C:\Users\Alanna\Documents\Homework\CSE 115A\Pantry\Pantry\backend\src\food.js">
+        <metrics statements="15" coveredstatements="10" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="2"/>
         <line num="1" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -125,8 +144,14 @@
         <line num="10" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="11" count="1" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
       </file>
-      <file name="login.js" path="C:\Users\CJ\Documents\CSE115A Assignments\Pantry\backend\src\login.js">
+      <file name="users.js" path="C:\Users\Alanna\Documents\Homework\CSE 115A\Pantry\Pantry\backend\src\users.js">
         <metrics statements="9" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
         <line num="2" count="2" type="stmt"/>
         <line num="4" count="2" type="stmt"/>
@@ -141,7 +166,7 @@
     </package>
     <package name="src.__tests__">
       <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-      <file name="db.js" path="C:\Users\CJ\Documents\CSE115A Assignments\Pantry\backend\src\__tests__\db.js">
+      <file name="db.js" path="C:\Users\Alanna\Documents\Homework\CSE 115A\Pantry\Pantry\backend\src\__tests__\db.js">
         <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="5" count="2" type="stmt"/>
         <line num="6" count="2" type="stmt"/>

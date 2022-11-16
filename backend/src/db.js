@@ -16,7 +16,7 @@ exports.insertUser = async (body) => {
   if (!searchUser) {
     const saltRounds = 10;
     body.password = bcrypt.hashSync(body.password, saltRounds);
-    const insert = `INSERT INTO loginTable(usr) VALUES ($1);`;
+    const insert = `INSERT INTO users(usr) VALUES ($1);`;
     const query = {
       text: insert,
       values: [body],
@@ -30,7 +30,7 @@ exports.insertUser = async (body) => {
 };
 
 exports.searchUser = async (email) => {
-  const select = `SELECT * FROM loginTable where usr->>'email' ILIKE $1`;
+  const select = `SELECT * FROM users where usr->>'email' ILIKE $1`;
   const query = {
     text: select,
     values: [email],
@@ -42,7 +42,7 @@ exports.searchUser = async (email) => {
 
 exports.selectUsers = async (body) => {
   const query = {
-    text: 'SELECT * FROM loginTable',
+    text: 'SELECT * FROM users',
     values: [],
   };
   const {rows} = await pool.query(query);
@@ -52,7 +52,7 @@ exports.selectUsers = async (body) => {
 exports.getUser = async (body) => {
   const email = body.email;
   const query = {
-    text: "SELECT * FROM loginTable WHERE usr->>'email' = $1",
+    text: "SELECT * FROM users WHERE usr->>'email' = $1",
     values: [email],
   }
   const {rows} = await pool.query(query);
@@ -61,7 +61,7 @@ exports.getUser = async (body) => {
 
 exports.selectFoodItems = async (body) => {
   const query = {
-    text: 'SELECT * FROM foodTable',
+    text: 'SELECT * FROM food',
     values: []
   };
   const {rows} = await pool.query(query);
@@ -75,7 +75,7 @@ exports.insertFood = async (body) => {
     const columns = ['item', 'amount', 'purchaseDate', 'notes', 'tags'];
     const values = columns.map((column, index) => `$` + (index+1));
 
-    const insert = `INSERT INTO foodTable(` + columns.toString() + `) VALUES (` + values.toString() + `);`;
+    const insert = `INSERT INTO food(` + columns.toString() + `) VALUES (` + values.toString() + `);`;
     const query = {
       text: insert,
       values: columns.map((column) => body[column]),
@@ -93,7 +93,7 @@ exports.updateFood = async (id, body) => {
   const sets = columns.map((column, index) => column + ` = $` + (index+1));
   console.log(sets.toString());
 
-  const update = `UPDATE foodtable SET ` + sets.toString() + ` WHERE id =` + id;
+  const update = `UPDATE food SET ` + sets.toString() + ` WHERE id =` + id;
   const query = {
     text: update,
     values: columns.map((column) => body[column]),
@@ -105,7 +105,7 @@ exports.updateFood = async (id, body) => {
 
 exports.deleteFood = async (id) => {
   console.log(id);
-  const update = `DELETE FROM foodtable WHERE id = $1`;
+  const update = `DELETE FROM food WHERE id = $1`;
   const query = {
     text: update,
     values: [id],

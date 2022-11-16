@@ -49,7 +49,7 @@ export default function Sidebar() {
     };
     console.log('itemObject');
     console.log(itemObject);
-    fetch('http://localhost:3010/v0/foodlist', {
+    fetch('http://localhost:3010/v0/food', {
       method: 'POST',
       body: JSON.stringify(itemObject),
       headers: {
