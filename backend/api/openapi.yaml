@@ -100,6 +100,128 @@ paths:
               schema:
                 $ref: '#/components/schemas/UnexpectedError'
 
+  /users_lists:
+    get:
+      # security:
+      #   - bearerAuth: []
+      description: Get all user-list connections
+      responses:
+        200:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserToList'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnexpectedError'
+
+  /lists:
+    get:
+      # security:
+      #   - bearerAuth: []
+      description: Get all lists
+      responses:
+        200:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnexpectedError'
+  
+  /lists/{usr_id}:
+    get:
+      # security:
+      #   - bearerAuth: []
+      description: Get all of the given user's lists
+      parameters:
+      - name: usr_id
+        in: path
+        description: Id of the user
+        required: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnexpectedError'
+    post:
+      # security:
+      #   - bearerAuth: []
+      description: Create a new list
+      parameters:
+      - name: usr_id
+        in: path
+        description: Id of the user the list belongs to
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        description: List to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewList'
+        # allowReserved: true
+      responses:
+        204:
+          description: Successfully created list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnexpectedError'
+
+  /users/{list_id}:
+    get:
+      # security:
+      #   - bearerAuth: []
+      description: Get all of the given list's users
+      parameters:
+      - name: list_id
+        in: path
+        description: Id of the list
+        required: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsrItem'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnexpectedError'
+
   /food:
     get:
       security:
@@ -129,7 +251,65 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/NewFoodItem'
+      responses:
+        201:
+          description: Successfully added item 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewFoodItem'
+        409:
+          description: Food already there
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnexpectedError'
 
+  /foodInList/{list_id}:
+    get:
+      # security:
+      #   - bearerAuth: []
+      description: Get all items
+      parameters:
+      - name: list_id
+        in: path
+        description: Id of the list
+        required: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FoodItem'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnexpectedError'
+    post:
+      # security:
+      #   - bearerAuth: []
+      description: Add a food item to list
+      parameters:
+      - name: list_id
+        in: path
+        description: Id of the list
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        description: Food item to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewFoodItem'
       responses:
         201:
           description: Successfully added item 
@@ -271,20 +451,51 @@ components:
     UsrItem:
       type: object
       properties:
-        name:
+        id:
+          type: integer
+        usr:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+              format: email
+              # https://regexpattern.com/email-address/
+              pattern: ^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$
+            password:
+              type: string
+    
+    UserToList:
+      type: object
+      properties:
+        id:
+          type: integer
+        usr_id:
+          type: integer
+        list_id:
+          type: integer
+
+    NewList:
+      type: object
+      properties:
+        list_name:
           type: string
-        email:
-          type: string
-          format: email
-          # https://regexpattern.com/email-address/
-          pattern: ^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$
-        password:
+
+    List:
+      type: object
+      properties:
+        id:
+          type: integer
+        list_name:
           type: string
           
     FoodItem:
       type: object
       properties:
         id:
+          type: integer
+        list_id:
           type: integer
         item:
           type: string
