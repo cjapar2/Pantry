@@ -35,8 +35,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function Mainlist() {
   const context = React.useContext(dataBaseContext);
-  const {currentList, setCurrentList,
-    availableLists, setAvailableLists, listTitle, setListTitle} = context;
+  const {currentList, setCurrentList, availableLists,
+    setAvailableLists, listTitle, setListTitle} = context;
   const data = context.dataChanged;
   const [itemList, setItemList] = useState([]);
   const [editItem, setEditItem] = React.useState({});

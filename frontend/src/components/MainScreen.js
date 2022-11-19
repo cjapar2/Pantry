@@ -22,13 +22,18 @@ export default function MainScreen() {
   const id = authentication.getID();
 
   const selectList = (listArray) => {
-    console.log(listArray[0].list_name);
+    console.log(listArray);
+
     if (listArray.length === 1) {
       setCurrentList(listArray[0]);
       setListTitle(listArray[0].list_name);
-    } else {
+
+    } else if (listArray.length === 0) {
       setListTitle('No lists are associated with this account yet.\n' + 
       `Create a list or Join another`);
+
+    } else {
+      setListTitle('Select a list from the dropdown menu');
     }
   }
 

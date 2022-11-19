@@ -12,13 +12,18 @@ import {dataBaseContext} from './App';
 export default function SelectList() {
   const authentication = useAuth();
   const context = React.useContext(dataBaseContext);
-  const {currentList, setCurrentList, availableLists, setAvailableLists} = context;
+  const {currentList, setCurrentList, availableLists,
+    setAvailableLists, listTitle, setListTitle} = context;
   const id = authentication.getID();
 
   const handleChange = (event) => {
-    let temp = [{'id': event.target.value}];
-    console.log(event.target.value);
-    setCurrentList(temp);
+    let list = availableLists.filter(obj => {
+      return obj.id === event.target.value;
+    });
+
+    console.log(list[0]);
+    setCurrentList(list[0]);
+    setListTitle(list[0].list_name);
   };
 
   return (
