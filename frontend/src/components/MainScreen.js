@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 
 import Mainlist from './Mainlist';
 import Navbar from './Navbar';
@@ -17,9 +17,7 @@ import {dataBaseContext} from './App';
 export default function MainScreen() {
   const authentication = useAuth();
   const context = React.useContext(dataBaseContext);
-  const {currentList, setCurrentList,
-    availableLists, setAvailableLists, listTitle,
-    setListTitle, listId, setListId} = context;
+  const {setCurrentList,setAvailableLists, setListTitle, setListId} = context;
   const id = authentication.getID();
 
   const selectList = (listArray) => {

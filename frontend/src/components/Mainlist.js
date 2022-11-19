@@ -35,14 +35,11 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function Mainlist() {
   const context = React.useContext(dataBaseContext);
-  const {currentList, setCurrentList, availableLists,
-    setAvailableLists, listTitle,
-    setListTitle, listId, setListId} = context;
+  const {currentList, listTitle, listId} = context;
   const data = context.dataChanged;
   const [itemList, setItemList] = useState([]);
   const [editItem, setEditItem] = React.useState({});
   const [deleteItem, setDeleteItem] = React.useState({});
-  // id: 0, item: '', amount: 0, purchaseDate: '', notes: '', tags: {}
   const [open, setOpen] = React.useState(false);
   const [openDelete, setOpenDelete] = React.useState(false);
   const authentication = useAuth();
@@ -64,10 +61,9 @@ export default function Mainlist() {
       return res.json();
     })
     .then((json) => {
-      //const data = json;
-      //data.sort((a, b) => a.id < b.id ? -1 : 1);
-      //console.log(json);
-      setItemList(json);
+      let items = json;
+      items.sort((a, b) => a.id < b.id ? -1 : 1);
+      setItemList(items);
     })
   }
 
@@ -78,10 +74,6 @@ export default function Mainlist() {
   }
 
   useEffect(() => {
-    //setListId(currentList.id);
-    //console.log(availableLists);
-    //console.log(listId);
-    //getUserLists();
     updateList();
   }, [data, currentList])
 

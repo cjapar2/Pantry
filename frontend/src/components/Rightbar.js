@@ -28,9 +28,6 @@ export default function Rightbar() {
   const [purchaseDate, setPurchaseDate] = useState(formattedDate.toString()); // convert date type to string type
   const [notes, setNotes] = useState('');
   const [tags, setTags] = useState({});
-  const updateTags = (tag, bool) => {
-    bool ? tags[tag] = true : delete tags[tag];
-  };
   const authentication = useAuth();
 
   //Context
@@ -39,6 +36,9 @@ export default function Rightbar() {
   const data = context.dataChanged;
   const {listId} = context;
 
+  const updateTags = (tag, bool) => {
+    bool ? tags[tag] = true : delete tags[tag];
+  };
 
   const nameSubmit = (event) => {
     event.preventDefault();

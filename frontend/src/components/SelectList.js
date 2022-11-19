@@ -12,9 +12,8 @@ import {dataBaseContext} from './App';
 export default function SelectList() {
   const authentication = useAuth();
   const context = React.useContext(dataBaseContext);
-  const {currentList, setCurrentList, availableLists,
-    setAvailableLists, listTitle,
-    setListTitle, listId, setListId} = context;
+  const {setCurrentList, availableLists, setListTitle,
+    listId, setListId} = context;
   const id = authentication.getID();
 
   const handleChange = (event) => {
@@ -32,7 +31,7 @@ export default function SelectList() {
     <FormControl sx={{ m: 1, minWidth: 120,}} size="small">
       <InputLabel sx={{ color: 'black'}} id="Select List">List Name</InputLabel>
       <Select
-        value={''}
+        value={listId}
         label="List Name"
         onChange={handleChange}
       >

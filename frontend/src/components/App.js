@@ -27,7 +27,7 @@ function App() {
   const [dataChanged, setDataChanged] = React.useState(false);
   const [currentList, setCurrentList] = React.useState({});
   const [availableLists, setAvailableLists] = React.useState([]);
-  const [listTitle, setListTitle] = React.useState('');
+  const [listTitle, setListTitle] = React.useState('List Name');
   const [listId, setListId] = React.useState(currentList.id);
   const data = useLocalStorage('user', null);
   let user = false;
