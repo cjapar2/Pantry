@@ -44,15 +44,17 @@ export default function Mainlist() {
   // id: 0, item: '', amount: 0, purchaseDate: '', notes: '', tags: {}
   const [open, setOpen] = React.useState(false);
   const [openDelete, setOpenDelete] = React.useState(false);
+  const [listId, setListId] = React.useState(currentList.id);
   const authentication = useAuth();
-  const id = authentication.getID();
+  const token = authentication.getToken();
 
   async function checkList() {
-    fetch('http://localhost:3010/v0/food', {
+    console.log(currentList);
+    fetch(`http://localhost:3010/v0/foodInList/${listId}`, {
       method: 'GET',
       headers: {
         'accept': 'application/json',
-        'Authorization': `Bearer ${authentication.getToken()}`,
+        'Authorization': `Bearer ${token}`,
       },
     })
     .then((res) => {
@@ -62,18 +64,26 @@ export default function Mainlist() {
       return res.json();
     })
     .then((json) => {
-      const data = json.rows;
-      data.sort((a, b) => a.id < b.id ? -1 : 1);
+      //const data = json;
+      //data.sort((a, b) => a.id < b.id ? -1 : 1);
       // console.log(json.rows);
-      setItemList(json.rows);
+      setItemList(json);
     })
   }
 
+  const updateList = () => {
+    if (listId) {
+      checkList();
+    }
+  }
+
   useEffect(() => {
+    setListId(currentList.id);
     console.log(availableLists);
+    console.log('test');
     //getUserLists();
-    checkList();
-  }, [data])
+    updateList();
+  }, [data, currentList])
 
   function handleClickOpen (item) {
     setEditItem(item);

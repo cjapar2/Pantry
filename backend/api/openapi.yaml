@@ -271,8 +271,8 @@ paths:
 
   /foodInList/{list_id}:
     get:
-      # security:
-      #   - bearerAuth: []
+      security:
+        - bearerAuth: []
       description: Get all items
       parameters:
       - name: list_id
@@ -287,7 +287,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FoodItem'
+                type: array
+                items:
+                  $ref: '#/components/schemas/FoodItem'
         default:
           description: unexpected error
           content:
