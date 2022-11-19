@@ -13,9 +13,12 @@ export const AuthProvider = ({children}) => {
   // call this function when you want to authenticate the user
   const login = async (data) => {
     setUser(data);
+  };
+
+  const navigateToMainlist = () => {
     const origin = location.state?.from?.pathname || '/mainlist';
     navigate(origin);
-  };
+  }
 
   // call this function to sign out logged in user
   const logout = () => {
@@ -29,8 +32,13 @@ export const AuthProvider = ({children}) => {
     return String(userLocal['accessToken']);
   };
 
+  const getID = () => {
+    const userLocal = JSON.parse(localStorage.getItem('user'));
+    return String(userLocal['id']);
+  }
+
   return <AuthContext.Provider value=
-    {{user, setUser, login, logout, getToken}}>{children}</AuthContext.Provider>;
+    {{user, setUser, login, logout, getToken, getID, navigateToMainlist}}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => {

@@ -109,7 +109,7 @@ exports.getTheseLists = async (listIDs) => {
   }
   const {rows} = await pool.query(query);
   console.log({rows});
-  return {rows};
+  return rows;
 };
 
 exports.createList = async (body) => {

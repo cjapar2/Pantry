@@ -48,6 +48,7 @@ function Login() {
       })
       .then((json) => {
         authentication.login(json);
+        authentication.navigateToMainlist();
       })
       .catch((error) => {
         console.log(error);

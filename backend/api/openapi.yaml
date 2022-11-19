@@ -140,8 +140,8 @@ paths:
   
   /lists/{usr_id}:
     get:
-      # security:
-      #   - bearerAuth: []
+      security:
+        - bearerAuth: []
       description: Get all of the given user's lists
       parameters:
       - name: usr_id
@@ -156,7 +156,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/List'
+                type: array
+                items:
+                  $ref: '#/components/schemas/List'
         default:
           description: unexpected error
           content:
@@ -430,6 +432,8 @@ components:
     AuthUser:
       type: object
       properties:
+        id:
+          type: integer
         name:
           type: string
         token:

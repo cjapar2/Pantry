@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React from 'react';
+import SelectList from './SelectList';
 import './Sidebar.css';
 
 /**
@@ -17,6 +18,7 @@ export default function Sidebar() {
           <li> <a href="test2">Create a Group</a></li>
           <li> <a href="test3">Other Stuff</a></li>
           <li> <a href="test4">Settings</a></li>
+          <li> <SelectList /> </li>
         </ul>
       </div>
     </div>

@@ -35,6 +35,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function Mainlist() {
   const context = React.useContext(dataBaseContext);
+  const {currentList, setCurrentList,
+    availableLists, setAvailableLists, listTitle, setListTitle} = context;
   const data = context.dataChanged;
   const [itemList, setItemList] = useState([]);
   const [editItem, setEditItem] = React.useState({});
@@ -43,8 +45,9 @@ export default function Mainlist() {
   const [open, setOpen] = React.useState(false);
   const [openDelete, setOpenDelete] = React.useState(false);
   const authentication = useAuth();
+  const id = authentication.getID();
 
-  async function checkList(event) {
+  async function checkList() {
     fetch('http://localhost:3010/v0/food', {
       method: 'GET',
       headers: {
@@ -67,8 +70,9 @@ export default function Mainlist() {
   }
 
   useEffect(() => {
-    //  console.log('test');
-      checkList();
+    console.log(availableLists);
+    //getUserLists();
+    checkList();
   }, [data])
 
   function handleClickOpen (item) {
@@ -105,7 +109,7 @@ export default function Mainlist() {
 
   return (
     <div className='mainList'>
-      <p className='listName'>List Name</p>
+      <p className='listName'>{listTitle}</p>
       <div>
       <List key={'toolbar'} sx={{ mt: 5 }} component={Stack} direction="row">
         <ListItem key={'item'}>

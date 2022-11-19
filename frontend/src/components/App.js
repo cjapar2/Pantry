@@ -12,6 +12,7 @@ import {ProtectedRoute} from './ProtectedRoute';
 import {AuthProvider, useAuth} from './AuthProvider';
 import {useLocalStorage} from './UseLocalStorage';
 import Rightbar from './Rightbar';
+import MainScreen from './MainScreen';
 
 /**
  * Simple component with no state.
@@ -24,6 +25,9 @@ import Rightbar from './Rightbar';
 function App() {
   const authentication = useAuth();
   const [dataChanged, setDataChanged] = React.useState(false);
+  const [currentList, setCurrentList] = React.useState({});
+  const [availableLists, setAvailableLists] = React.useState([]);
+  const [listTitle, setListTitle] = React.useState('');
   const data = useLocalStorage('user', null);
   let user = false;
 
@@ -35,15 +39,16 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <dataBaseContext.Provider value={{dataChanged, setDataChanged}}>
+        <dataBaseContext.Provider
+          value={{dataChanged, setDataChanged, currentList, setCurrentList,
+            availableLists, setAvailableLists, listTitle, setListTitle
+          }}>
           <Routes>
             <Route path='/createaccount' element={<CreateAccount/>} />
             <Route path='/' element=
               {user ? <Navigate to='/mainlist'/> : <Login/>}/>
             <Route element={<ProtectedRoute/>}>
-              <Route path='/mainlist' element={<div>
-                <Mainlist/><Navbar/><Sidebar/><Rightbar/>
-              </div>} />
+              <Route path='/mainlist' element={<MainScreen />} />
             </Route>
           </Routes>
         </dataBaseContext.Provider>
