@@ -10,7 +10,7 @@ import {dataBaseContext} from './App';
  *
  * @return {object} JSX
  */
-export default function Sidebar() {
+export default function Rightbar() {
   // Create a date object from a date string
   var currentDate = new Date();
 
@@ -37,40 +37,48 @@ export default function Sidebar() {
   const context = React.useContext(dataBaseContext);
   const setData = context.setDataChanged;
   const data = context.dataChanged;
+  const {listId} = context;
+
 
   const nameSubmit = (event) => {
     event.preventDefault();
-    const itemObject = {
-      "item": item,
-      "amount": parseInt(amount),
-      "purchaseDate": purchaseDate,
-      "notes": notes,
-      "tags": tags
-    };
-    console.log('itemObject');
-    console.log(itemObject);
-    fetch('http://localhost:3010/v0/food', {
-      method: 'POST',
-      body: JSON.stringify(itemObject),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${authentication.getToken()}`,
-      },
-    })
-      .then((res) => {
-        console.log(res);
-        if (!res.ok) {
-          throw res;
-        }
-        return res.json();
+
+    if (listId) {
+      const itemObject = {
+        "item": item,
+        "amount": parseInt(amount),
+        "purchaseDate": purchaseDate,
+        "notes": notes,
+        "tags": tags
+      };
+      console.log('itemObject');
+      console.log(itemObject);
+      fetch(`http://localhost:3010/v0/foodInList/${listId}`, {
+        method: 'POST',
+        body: JSON.stringify(itemObject),
+        headers: {
+          'accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authentication.getToken()}`,
+        },
       })
-      .then((json) => {
-        setData(!data);
-      })
-      .catch((err) => {
-        console.log('err', err);
-        alert(err);
-      });
+        .then((res) => {
+          console.log(res);
+          if (!res.ok) {
+            throw res;
+          }
+          return res.json();
+        })
+        .then((json) => {
+          setData(!data);
+        })
+        .catch((err) => {
+          console.log('err', err);
+          alert(err);
+        });
+    } else {
+      alert("Please select a list to add the item in");
+    }
   };
 
   const tagNames = ["Shared", "Dairy", "Meat", "Produce", "Spice"];

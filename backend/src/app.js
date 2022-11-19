@@ -52,7 +52,7 @@ app.get('/v0/users/:list_id', lists.getListsUsers);
 app.get('/v0/food', auth.check, food.getFood);
 app.post('/v0/food', auth.check, food.postFood);
 app.get('/v0/foodInList/:list_id', auth.check, food.getFoodOfList);
-app.post('/v0/foodInList/:list_id', food.postFoodInList);
+app.post('/v0/foodInList/:list_id', auth.check, food.postFoodInList);
 app.put('/v0/food/:id', auth.check, food.putFood);
 app.delete('/v0/food/:id', auth.check, food.deleteFood);
 

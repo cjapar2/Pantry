@@ -2,6 +2,7 @@
 
 import React from 'react';
 import SelectList from './SelectList';
+import { Typography } from '@mui/material';
 import './Sidebar.css';
 
 /**
@@ -18,6 +19,7 @@ export default function Sidebar() {
           <li> <a href="test2">Create a Group</a></li>
           <li> <a href="test3">Other Stuff</a></li>
           <li> <a href="test4">Settings</a></li>
+          <li> <Typography> Select List to View/Edit:</Typography> </li>
           <li> <SelectList /> </li>
         </ul>
       </div>

@@ -28,6 +28,7 @@ function App() {
   const [currentList, setCurrentList] = React.useState({});
   const [availableLists, setAvailableLists] = React.useState([]);
   const [listTitle, setListTitle] = React.useState('');
+  const [listId, setListId] = React.useState(currentList.id);
   const data = useLocalStorage('user', null);
   let user = false;
 
@@ -41,7 +42,8 @@ function App() {
       <AuthProvider>
         <dataBaseContext.Provider
           value={{dataChanged, setDataChanged, currentList, setCurrentList,
-            availableLists, setAvailableLists, listTitle, setListTitle
+            availableLists, setAvailableLists, listTitle, setListTitle,
+            listId, setListId
           }}>
           <Routes>
             <Route path='/createaccount' element={<CreateAccount/>} />

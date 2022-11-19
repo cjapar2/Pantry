@@ -297,8 +297,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UnexpectedError'
     post:
-      # security:
-      #   - bearerAuth: []
+      security:
+        - bearerAuth: []
       description: Add a food item to list
       parameters:
       - name: list_id

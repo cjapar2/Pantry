@@ -18,7 +18,8 @@ export default function MainScreen() {
   const authentication = useAuth();
   const context = React.useContext(dataBaseContext);
   const {currentList, setCurrentList,
-    availableLists, setAvailableLists, listTitle, setListTitle} = context;
+    availableLists, setAvailableLists, listTitle,
+    setListTitle, listId, setListId} = context;
   const id = authentication.getID();
 
   const selectList = (listArray) => {
@@ -27,6 +28,7 @@ export default function MainScreen() {
     if (listArray.length === 1) {
       setCurrentList(listArray[0]);
       setListTitle(listArray[0].list_name);
+      setListId(listArray[0].id)
 
     } else if (listArray.length === 0) {
       setListTitle('No lists are associated with this account yet.\n' + 

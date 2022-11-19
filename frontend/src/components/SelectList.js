@@ -13,7 +13,8 @@ export default function SelectList() {
   const authentication = useAuth();
   const context = React.useContext(dataBaseContext);
   const {currentList, setCurrentList, availableLists,
-    setAvailableLists, listTitle, setListTitle} = context;
+    setAvailableLists, listTitle,
+    setListTitle, listId, setListId} = context;
   const id = authentication.getID();
 
   const handleChange = (event) => {
@@ -24,11 +25,12 @@ export default function SelectList() {
     console.log(list[0]);
     setCurrentList(list[0]);
     setListTitle(list[0].list_name);
+    setListId(list[0].id);
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-      <InputLabel id="Select List">List Name</InputLabel>
+    <FormControl sx={{ m: 1, minWidth: 120,}} size="small">
+      <InputLabel sx={{ color: 'black'}} id="Select List">List Name</InputLabel>
       <Select
         value={''}
         label="List Name"
