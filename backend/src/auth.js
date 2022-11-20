@@ -14,16 +14,16 @@ const pool = new Pool({
 
 exports.authenticate = async (req, res) => {
   const user = await db.getUser(req.body);
-  console.log(user[0]);
+  console.log(user);
 
-  if (user.length != 0 && bcrypt.compareSync(req.body.password, user[0].usr.password)) {
+  if (user.length != 0 && bcrypt.compareSync(req.body.password, user.usr.password)) {
     const accessToken = jwt.sign(
-      {email: user[0].usr.email}, 
+      {email: user.usr.email}, 
       secrets.accessToken, {
         // expiresIn: '30m',
         algorithm: 'HS256'
       });
-    res.status(200).json({id: user[0].id, name: user[0].usr.name, accessToken: accessToken});
+    res.status(200).json({id: user.id, name: user.usr.name, accessToken: accessToken});
   } else {
     res.status(401).send();
   }
