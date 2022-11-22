@@ -42,7 +42,7 @@ export default function Rightbar() {
 
   const nameSubmit = (event) => {
     event.preventDefault();
-
+    
     if (listId) {
       const itemObject = {
         "item": item,
@@ -70,6 +70,7 @@ export default function Rightbar() {
           return res.json();
         })
         .then((json) => {
+          console.log('set data');
           setData(!data);
         })
         .catch((err) => {

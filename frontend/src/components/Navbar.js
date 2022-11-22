@@ -24,6 +24,9 @@ export default function Navbar() {
       </a>
       <ul>
         <li>
+          Profile
+        </li>
+        <li>
           <a onClick={onLogout} href="/">Logout</a>
         </li>
       </ul>
