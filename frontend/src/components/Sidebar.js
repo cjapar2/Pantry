@@ -48,6 +48,7 @@ export default function Sidebar() {
 
   //Context
   const context = React.useContext(dataBaseContext);
+  const {availableLists, setAvailableLists} = context;
   const setData = context.setDataChanged;
   const data = context.dataChanged;
 
@@ -77,6 +78,8 @@ export default function Sidebar() {
       })
         .then((json) => {
           console.log('data set');
+          availableLists.push(json);
+          setAvailableLists(availableLists);
           setData(!data);
         })
         .catch((err) => {
