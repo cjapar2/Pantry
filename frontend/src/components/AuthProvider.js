@@ -37,8 +37,14 @@ export const AuthProvider = ({children}) => {
     return String(userLocal['id']);
   }
 
+  const getName = () => {
+    const userLocal = JSON.parse(localStorage.getItem('user'));
+    console.log(userLocal);
+    return String(userLocal['name']);
+  }
+
   return <AuthContext.Provider value=
-    {{user, setUser, login, logout, getToken, getID, navigateToMainlist}}>{children}</AuthContext.Provider>;
+    {{user, setUser, login, logout, getToken, getID, getName, navigateToMainlist}}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => {
