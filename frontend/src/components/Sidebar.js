@@ -2,11 +2,11 @@
 
 import React from 'react';
 import SelectList from './SelectList';
-import { Typography, Button, Modal, Box } from '@mui/material';
+import { Typography, Button, Modal, Box, Grid, Stack } from '@mui/material';
 import './Sidebar.css';
 import {useAuth} from './AuthProvider';
 import {dataBaseContext} from './App';
-
+import { textAlign } from '@mui/system';
 
 const style = {
   position: 'absolute',
@@ -44,6 +44,7 @@ export default function Sidebar() {
   const [createOpen, setCreateOpen] = React.useState(false);
   const [usrId, setUsrId] = React.useState(0);
   const [listName, setListName] = React.useState('');
+  const [joinGroupId, setjoinGroupId] = React.useState('');
   const authentication = useAuth();
 
   //Context
@@ -108,8 +109,24 @@ export default function Sidebar() {
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                   Join a List
                 </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  Work in progress.
+                <Typography id="modal-modal-description" class="joinGroup" sx={{ mt: 2 }}>
+                  <form>
+                    <Stack spacing={1}>
+                      <Typography id="modal-modal-title" variant="subtitle1" component="h2">
+                        Enter the group ID of the group you want to join.
+                      </Typography>
+                      <input
+                        id="groupID"
+                        type="text"
+                        placeholder="Group ID"
+                        onChange={(e) => setjoinGroupId(e.target.value)}
+                      />
+                      <Stack direction="row" spacing={2} justifyContent="center">
+                        <button>Join Group</button>
+                        <button>Cancel</button>
+                      </Stack>
+                    </Stack>
+                  </form>
                 </Typography>
               </Box>
             </Modal></li>
