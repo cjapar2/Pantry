@@ -2,7 +2,7 @@
     "name": "pantry-project-backend",
     "version": "2.0.0",
     "description": "Pantry - Backend",
-    "author": "David Harrison <dcharris@ucsc.edu>",
+    "author": "Pantry",
     "license": "UNLICENSED",
     "repository": "none",
     "devDependencies": {

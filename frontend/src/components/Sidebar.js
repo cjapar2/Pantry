@@ -2,11 +2,10 @@
 
 import React from 'react';
 import SelectList from './SelectList';
-import { Typography, Button, Modal, Box, Grid, Stack } from '@mui/material';
+import { Typography, Button, Modal, Box, Stack } from '@mui/material';
 import './Sidebar.css';
-import {useAuth} from './AuthProvider';
-import {dataBaseContext} from './App';
-import { textAlign } from '@mui/system';
+import { useAuth } from './AuthProvider';
+import { dataBaseContext } from './App';
 import DeleteList from './DeleteList';
 
 const style = {
@@ -43,7 +42,6 @@ export default function Sidebar() {
   // State of elements
   const [joinOpen, setJoinOpen] = React.useState(false);
   const [createOpen, setCreateOpen] = React.useState(false);
-  const [usrId, setUsrId] = React.useState(0);
   const [listName, setListName] = React.useState('');
   const [joinGroupId, setjoinGroupId] = React.useState('');
   const authentication = useAuth();
@@ -56,12 +54,12 @@ export default function Sidebar() {
 
   const createSubmit = (event) => {
     event.preventDefault();
-
+    
     const listObject = {
       "list_name": listName
     };
     
-    fetch(`http://localhost:3010/v0/lists/${usrId}`, {
+    fetch(`http://localhost:3010/v0/lists/${authentication.getID()}`, {
       method: 'POST',
       body: JSON.stringify(listObject),
       headers: {
@@ -146,14 +144,6 @@ export default function Sidebar() {
                 </Typography>
                 <form onSubmit={createSubmit}>
                   <ul>
-                    <li style={listStyle}>
-                      <input
-                        id="userID"
-                        type="number"
-                        placeholder="User ID"
-                        onChange={(e) => setUsrId(e.target.value)}
-                      />
-                    </li>
                     <li style={listStyle}>
                       <input
                         id="listName"

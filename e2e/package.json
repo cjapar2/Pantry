@@ -2,7 +2,7 @@
   "name": "pantry-project-e2etest",
   "version": "1.0.0",
   "description": "Pantry - End to End Test",
-  "author": "David Harrison <dcharris@ucsc.edu>",
+  "author": "Pantry",
   "license": "UNLICENSED",
   "repository": "none",
   "devDependencies": {
