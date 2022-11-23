@@ -7,6 +7,7 @@ import './Sidebar.css';
 import {useAuth} from './AuthProvider';
 import {dataBaseContext} from './App';
 import { textAlign } from '@mui/system';
+import DeleteList from './DeleteList';
 
 const style = {
   position: 'absolute',
@@ -79,8 +80,8 @@ export default function Sidebar() {
       })
         .then((json) => {
           console.log('data set');
-          availableLists.push(json);
-          setAvailableLists(availableLists);
+          //availableLists.push(json);
+          //setAvailableLists(availableLists);
           setData(!data);
         })
         .catch((err) => {
@@ -176,6 +177,8 @@ export default function Sidebar() {
           {/* <li> <a href="test4">Settings</a></li> */}
           <li> <Typography> Select List to View/Edit:</Typography> </li>
           <li> <SelectList /> </li>
+          <li> <Typography> Select List to Delete:</Typography></li>
+          <li> <DeleteList /> </li>
         </ul>
       </div>
     </div>

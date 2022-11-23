@@ -215,8 +215,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UnexpectedError'
     delete:
-      #security:
-      #  - bearerAuth: []
+      security:
+        - bearerAuth: []
       description: Delete List from user
       parameters:
       - name: list_id
