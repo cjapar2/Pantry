@@ -41,11 +41,12 @@ app.post('/v0/signup', users.postUser);
 
 // List Routes
 app.get('/v0/lists', lists.getLists);
-app.get('/v0/lists/:usr_id', auth.check, lists.getUsersLists);
+app.get('/v0/lists/:usr_id', auth.check, lists.getUsersLists)
 app.post('/v0/lists/:usr_id', lists.newList);
 
 // User from list Routes
 app.get('/v0/users/:list_id', lists.getListsUsers);
+app.delete('/v0/users/:list_id', lists.removeList);
 
 // User-List routes
 app.get('/v0/users_lists', lists.getUsersToLists);

@@ -143,6 +143,15 @@ exports.createList = async (body) => {
   return list;
 };
 
+exports.deleteList = async (id) => {
+  const update = `DELETE FROM lists WHERE id = $1`;
+  const query = {
+    text: update,
+    values: [id],
+  }
+  await pool.query(query);
+};
+
 exports.createUserListConc = async (usr_id, list_id) => {
   const insert = `INSERT INTO users_to_lists(usr_id, list_id)
     VALUES ($1, $2)
