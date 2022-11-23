@@ -7,6 +7,7 @@ import './Sidebar.css';
 import { useAuth } from './AuthProvider';
 import { dataBaseContext } from './App';
 import DeleteList from './DeleteList';
+import ShareList from './ShareList';
 
 const style = {
   position: 'absolute',
@@ -29,7 +30,7 @@ const listStyle = {
   'listStyle': 'none',
   padding: 0,
   margin: 0,
-  'margin-bottom': '10px'
+  marginBottom: '10px'
 };
 
 /**
@@ -205,6 +206,8 @@ export default function Sidebar() {
           </li>
           {/* <li> <a href="test3">Other Stuff</a></li> */}
           {/* <li> <a href="test4">Settings</a></li> */}
+          <li> <Typography> Select List to Share:</Typography></li>
+          <li> <ShareList /> </li>
           <li> <Typography> Select List to View/Edit:</Typography> </li>
           <li> <SelectList /> </li>
           <li> <Typography> Select List to Delete:</Typography></li>

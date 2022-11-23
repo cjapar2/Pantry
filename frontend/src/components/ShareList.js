@@ -15,14 +15,11 @@ import {useAuth} from './AuthProvider';
 import {dataBaseContext} from './App';
 
 
-export default function DeleteList() {
-  const authentication = useAuth();
+export default function ShareList() {
   const context = React.useContext(dataBaseContext);
   const {availableLists} = context;
-  const setData = context.setDataChanged;
-  const data = context.dataChanged;
   const [selectedList, setSelectedList] = React.useState({});
-  const [openDelete, setOpenDelete] = React.useState(false);
+  const [openShare, setOpenShare] = React.useState(false);
 
   const handleChange = (event) => {
     let list = availableLists.filter(obj => {
@@ -30,26 +27,12 @@ export default function DeleteList() {
     });
 
     setSelectedList(list[0]);
-    setOpenDelete(true);
+    setOpenShare(true);
   };
 
   function handleClose (){
-    setOpenDelete(false);
+    setOpenShare(false);
   };
-
-  function deletingItem (){
-    fetch(`http://localhost:3010/v0/users/${selectedList.id}`, {
-      method: 'DELETE',
-      headers: {
-        'accept': 'application/json',
-        'Authorization': `Bearer ${authentication.getToken()}`,
-      },
-    })
-    .then(() => {
-      setOpenDelete(false);
-      setData(!data);
-    })
-  }
 
   return (
     <div>
@@ -65,19 +48,16 @@ export default function DeleteList() {
           )}
         </Select>
       </FormControl>
-      <Dialog open={openDelete} onClose={handleClose}>
-        <DialogTitle>Delete List</DialogTitle>
+      <Dialog open={openShare} onClose={handleClose}>
+        <DialogTitle>Share List</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Do you do want to delete {selectedList.list_name}?
+            Share this code to have others join {selectedList.list_name}: {selectedList.id}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={deletingItem} color="primary" autoFocus>
-            Yes
+            Close
           </Button>
         </DialogActions>
       </Dialog>

@@ -1,27 +1,23 @@
 /* eslint-disable */
 
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import {useAuth} from './AuthProvider';
 import {dataBaseContext} from './App';
 
 
 export default function SelectList() {
-  const authentication = useAuth();
   const context = React.useContext(dataBaseContext);
   const {setCurrentList, availableLists, setListTitle,
     listId, setListId} = context;
-  const id = authentication.getID();
 
   const handleChange = (event) => {
     let list = availableLists.filter(obj => {
       return obj.id === event.target.value;
     });
 
-    console.log(list[0]);
     setCurrentList(list[0]);
     setListTitle(list[0].list_name);
     setListId(list[0].id);
