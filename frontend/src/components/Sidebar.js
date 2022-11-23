@@ -59,7 +59,6 @@ export default function Sidebar() {
       "list_name": listName
     };
     
-    console.log('1:', listObject);
     fetch(`http://localhost:3010/v0/lists/${usrId}`, {
       method: 'POST',
       body: JSON.stringify(listObject),
@@ -70,20 +69,17 @@ export default function Sidebar() {
       },
     })
       .then((res) => {
-        console.log('res:', res);
         if (!res.ok) {
           throw res;
         }
         return res.json();
       })
         .then((json) => {
-          console.log('data set');
           availableLists.push(json);
           setAvailableLists(availableLists);
           setData(!data);
         })
         .catch((err) => {
-          console.log('err', err);
           alert(err);
         });
   }

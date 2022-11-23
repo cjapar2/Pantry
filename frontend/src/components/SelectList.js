@@ -29,7 +29,7 @@ export default function SelectList() {
 
   return (
     <FormControl sx={{ m: 1, minWidth: 120,}} size="small">
-      <InputLabel sx={{ color: 'black'}} id="Select List">List Name</InputLabel>
+      <InputLabel sx={{ color: 'black'}} id="Select List">Your Lists</InputLabel>
       <Select
         value={listId}
         label="List Name"

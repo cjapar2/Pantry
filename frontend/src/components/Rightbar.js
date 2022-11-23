@@ -63,18 +63,15 @@ export default function Rightbar() {
         },
       })
         .then((res) => {
-          console.log(res);
           if (!res.ok) {
             throw res;
           }
           return res.json();
         })
         .then((json) => {
-          console.log('set data');
           setData(!data);
         })
         .catch((err) => {
-          console.log('err', err);
           alert(err);
         });
     } else {

@@ -39,7 +39,6 @@ export const AuthProvider = ({children}) => {
 
   const getName = () => {
     const userLocal = JSON.parse(localStorage.getItem('user'));
-    console.log(userLocal);
     return String(userLocal['name']);
   }
 
