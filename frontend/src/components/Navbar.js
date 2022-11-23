@@ -49,7 +49,6 @@ export default function Navbar() {
             }}
           >
             <Typography sx={{ p: 2 }}>Name: {authentication.getName()}</Typography>
-            <Typography sx={{ p: 2 }}>User ID: {authentication.getID()}</Typography>
           </Popover>
         </li>
         <li>

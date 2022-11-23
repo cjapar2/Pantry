@@ -54,7 +54,7 @@ export default function Sidebar() {
 
   const createSubmit = (event) => {
     event.preventDefault();
-    
+
     const listObject = {
       "list_name": listName
     };
@@ -75,7 +75,6 @@ export default function Sidebar() {
         return res.json();
       })
         .then((json) => {
-          console.log('data set');
           //availableLists.push(json);
           //setAvailableLists(availableLists);
           setData(!data);
