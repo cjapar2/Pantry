@@ -18,6 +18,7 @@ export default function MainScreen() {
   const authentication = useAuth();
   const context = React.useContext(dataBaseContext);
   const {setCurrentList,setAvailableLists, setListTitle, setListId} = context;
+  const data = context.dataChanged;
   const id = authentication.getID();
 
   const selectList = (listArray) => {
@@ -61,7 +62,7 @@ export default function MainScreen() {
 
   useEffect (() => {
     getUserLists();
-  }, [])
+  }, [data])
 
   return (
     <div>

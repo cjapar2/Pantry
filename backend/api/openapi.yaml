@@ -214,6 +214,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnexpectedError'
+    delete:
+      security:
+        - bearerAuth: []
+      description: Delete List from user
+      parameters:
+      - name: list_id
+        in: path
+        description: Id of the user the list belongs to
+        required: true
+        schema:
+          type: integer
+      responses:
+        201:
+          description: Successfully deleted list
+        400:
+          description: User not found
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnexpectedError'
 
   /users_lists:
     get:

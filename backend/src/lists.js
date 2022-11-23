@@ -68,3 +68,8 @@ exports.newUserListConc = async (req, res) => {
   const conc = await db.createUserListConc(req.body.usr_id, req.body.list_id);
   res.status(201).json(conc);
 };
+
+exports.removeList = async (req, res) => {
+  await db.deleteList(req.params.list_id);
+  res.status(204).send();
+}
