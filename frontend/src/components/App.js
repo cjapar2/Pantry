@@ -13,6 +13,9 @@ import {AuthProvider, useAuth} from './AuthProvider';
 import {useLocalStorage} from './UseLocalStorage';
 import Rightbar from './Rightbar';
 import MainScreen from './MainScreen';
+import './App.css';
+import Fridge from './fridge.js';
+
 
 /**
  * Simple component with no state.
@@ -38,26 +41,29 @@ function App() {
   });
 
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <dataBaseContext.Provider
-          value={{dataChanged, setDataChanged, currentList, setCurrentList,
-            availableLists, setAvailableLists, listTitle, setListTitle,
-            listId, setListId
-          }}>
-          <Routes>
-            <Route path='/createaccount' element={<CreateAccount/>} />
-            <Route path='/' element=
-              {user ? <Navigate to='/mainlist'/> : <Login/>}/>
-            <Route element={<ProtectedRoute/>}>
-              <Route path='/mainlist' element={<MainScreen />} />
-            </Route>
-          </Routes>
-        </dataBaseContext.Provider>
-      </AuthProvider>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter style={{"  background-color": "blue"}}>
+        <AuthProvider>
+          <dataBaseContext.Provider
+            value={{dataChanged, setDataChanged, currentList, setCurrentList,
+              availableLists, setAvailableLists, listTitle, setListTitle,
+              listId, setListId
+            }}>
+            <Routes>
+              <Route path='/createaccount' element={<CreateAccount/>} />
+              <Route path='/' element=
+                {user ? <Navigate to='/mainlist'/> : <Login/>}/>
+              <Route element={<ProtectedRoute/>}>
+                <Route path='/mainlist' element={<MainScreen />} />
+              </Route>
+            </Routes>
+          </dataBaseContext.Provider>
+        </AuthProvider>
+      </BrowserRouter>
+    </div>
   );
 }
+
 
 export default App;
 export {

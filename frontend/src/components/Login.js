@@ -7,6 +7,20 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import {useAuth} from './AuthProvider';
+import * as THREE from 'three';
+import {Canvas} from '@react-three/fiber';
+import {OrbitControls} from '@react-three/drei';
+import Model from './fridge_model';
+import { Suspense } from 'react'  
+
+const divStyle = {
+  'display': 'flex',
+  'flexDirection':'row',
+}
+
+const boxStyle = {
+  'display': 'flex',
+}
 
 /**
  * Component that displays the Login Page.
@@ -57,13 +71,8 @@ function Login() {
   };
 
   return (
-    <Box className='outerContainer'>
-      <Box sx={{
-        width: '50%',
-        display: 'flex',
-        flexDirection: 'column',
-        pt: '5%',
-      }}>
+    <div className='outerContainer' style={{divStyle}}>
+      <Box style={boxStyle} marginTop='80px'>
         <Grid container className='gridContainer' direction={'column'}
           columns={1} spacing={3} alignItems={'center'}>
           <Grid item>
@@ -117,8 +126,18 @@ function Login() {
             </FormGroup>
           </Grid>
         </Grid>
+        <Box style={boxStyle} marginTop='0px'>
+          <Canvas style={{width: "50vw", height: "70vh"}}>
+            <Suspense fallback={null}>
+            <OrbitControls enableZoom={false}/>
+            <ambientLight intensity={0.5}/>
+            <pointLight position={[5, 5, 5]} intensity={1}/>
+              <Model rotation={[0, -90, 0]}/>
+            </Suspense>
+          </Canvas>
+        </Box>
       </Box>
-    </Box>
+    </div>
   );
 }
 
