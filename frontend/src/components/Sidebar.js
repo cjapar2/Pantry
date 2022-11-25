@@ -7,6 +7,7 @@ import './Sidebar.css';
 import { useAuth } from './AuthProvider';
 import { dataBaseContext } from './App';
 import DeleteList from './DeleteList';
+import ShareList from './ShareList';
 
 const style = {
   position: 'absolute',
@@ -29,7 +30,7 @@ const listStyle = {
   'listStyle': 'none',
   padding: 0,
   margin: 0,
-  'margin-bottom': '10px'
+  marginBottom: '10px'
 };
 
 /**
@@ -51,6 +52,48 @@ export default function Sidebar() {
   const {availableLists, setAvailableLists} = context;
   const setData = context.setDataChanged;
   const data = context.dataChanged;
+
+  const CreateCancel = () => {
+    setCreateOpen(false)
+  };
+
+  const joinCancel = () => {
+    setJoinOpen(false)
+  };
+  
+  const joinSubmit = (event) => {
+    event.preventDefault();
+    console.log(authentication.getID());
+    console.log(joinGroupId);
+    const itemobj = {
+      "usr_id": parseInt(authentication.getID()),
+      "list_id": parseInt(joinGroupId),
+    }
+    console.log(JSON.stringify(itemobj));
+    fetch ('http://localhost:3010/v0/users_lists', {
+      method: 'POST',
+      body: JSON.stringify(itemobj),
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authentication.getToken()}`,
+      },
+    })
+    .then((res) => {
+      if (!res.ok) {
+        throw res;
+      }
+      return res.json();
+    })
+    .then((json) => {
+      setData(!data);
+      console.log(createOpen);
+      setJoinOpen(false);
+    })
+    .catch((err) => {
+      alert(err);
+    });
+  };
 
   const createSubmit = (event) => {
     event.preventDefault();
@@ -78,6 +121,7 @@ export default function Sidebar() {
           //availableLists.push(json);
           //setAvailableLists(availableLists);
           setData(!data);
+          setCreateOpen(false);
         })
         .catch((err) => {
           alert(err);
@@ -117,8 +161,8 @@ export default function Sidebar() {
                         onChange={(e) => setjoinGroupId(e.target.value)}
                       />
                       <Stack direction="row" spacing={2} justifyContent="center">
-                        <button>Join Group</button>
-                        <button>Cancel</button>
+                        <button onClick={joinSubmit}>Join Group</button>
+                        <button onClick={joinCancel} >Cancel</button>
                       </Stack>
                     </Stack>
                   </form>
@@ -153,6 +197,7 @@ export default function Sidebar() {
                     </li>
                     <li style={listStyle} className='buttonLi'>
                       <button className='createListButton'>Create List</button>
+                      <button onClick={CreateCancel} >Cancel</button>
                     </li>
                   </ul>
                 </form>
@@ -161,6 +206,8 @@ export default function Sidebar() {
           </li>
           {/* <li> <a href="test3">Other Stuff</a></li> */}
           {/* <li> <a href="test4">Settings</a></li> */}
+          <li> <Typography> Select List to Share:</Typography></li>
+          <li> <ShareList /> </li>
           <li> <Typography> Select List to View/Edit:</Typography> </li>
           <li> <SelectList /> </li>
           <li> <Typography> Select List to Delete:</Typography></li>
