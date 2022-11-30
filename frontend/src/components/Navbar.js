@@ -37,7 +37,7 @@ export default function Navbar() {
       </a>
       <ul>
         <li>
-          <Button onClick={openProfile}>Profile</Button>
+          <Button onClick={openProfile} sx={{color:'white'}}>Profile</Button>
           <Popover
             id="profile"
             open={open}

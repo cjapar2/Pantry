@@ -5,7 +5,7 @@
 
 .nav {
     position:fixed;
-    background-color: #333;
+    background-color: rgb(33, 155, 33);
     color: white;
     display: flex;
     justify-content: space-between;
