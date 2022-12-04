@@ -2,25 +2,17 @@
 
 import * as React from 'react';
 import {useNavigate} from 'react-router-dom';
-import {FormControl, FormGroup, TextField, Typography} from '@mui/material';
+import {FormControl, FormGroup, TextField, Typography, Link, Paper} from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import {useAuth} from './AuthProvider';
-import * as THREE from 'three';
 import {Canvas} from '@react-three/fiber';
 import {OrbitControls} from '@react-three/drei';
 import Model from './fridge_model';
 import { Suspense } from 'react'  
 
-const divStyle = {
-  'display': 'flex',
-  'flexDirection':'row',
-}
-
-const boxStyle = {
-  'display': 'flex',
-}
+import pantry from '../asset/pantry.jpg'
 
 /**
  * Component that displays the Login Page.
@@ -71,72 +63,89 @@ function Login() {
   };
 
   return (
-    <div className='outerContainer' style={{divStyle}}>
-      <Box style={boxStyle} marginTop='80px'>
-        <Grid container className='gridContainer' direction={'column'}
-          columns={1} spacing={3} alignItems={'center'}>
-          <Grid item>
-            <FormControl className='formControl'>
-              <Typography sx={{
-                textAlign: 'center',
-                fontSize: '26px',
-                pb: '25px',
-              }}>Welcome to Pantry</Typography>
-              <TextField label='Email' size='small'
-                onChange={handleInputChange} name='email'
-                sx={{
-                  alignSelf: 'center',
-                  pb: '20px',
-                  minWidth: '100px',
-                }}/>
-              <TextField label='Password' size='small'
-                onChange={handleInputChange} name='password'
-                sx={{
-                  alignSelf: 'center',
-                  pb: '20px',
-                  minWidth: '100px',
-                }}/>
-              <Button variant='contained' type='submit' size='large'
-                onClick={onLoginSubmit}
-                sx={{
-                  alignSelf: 'center',
-                  backgroundColor: 'darkblue',
-                  height: '35px',
-                }}>Login</Button>
-            </FormControl>
-          </Grid>
-          <Grid item alignContent='center'>
-            <FormGroup sx={{
+    <div 
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '100vh',
+      marginLeft: '4%'
+    }}>
+     
+      <Grid container component="main" direction="column" sx={{ height: '65vh' }}>
+        <Grid xs={6} item component={Paper} elevation={6} rounded justifyContent="center">
+          <Box
+            sx={{
+              my: 17,
+              mx: 4,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '40vw'
+            }}
+          >
+            <FormControl  sx={{ 
+              mt: 2,
               justifyContent: 'center',
               alignContent: 'center',
-              pt: '35px',
-            }}>
+              verticalAlign: 'center',
+             }}>
+               <Typography sx={{
+                 fontSize: '26px',
+                 pb: '25px',
+               }}>Welcome to Pantry</Typography>
+               <TextField label='Email' size='small'
+                 onChange={handleInputChange} name='email' fullWidth required
+                 sx={{
+                   alignSelf: 'center',
+                   pb: '20px',
+                   width: '150%'
+                 }}/>
+               <TextField label='Password' size='small' type="password"
+                 onChange={handleInputChange} name='password' required
+                 sx={{
+                   alignSelf: 'center',
+                   pb: '20px',
+                   width: '150%'
+                 }}/>
+               <Button variant='contained' type='submit' size='large' fullWidth
+                 onClick={onLoginSubmit}
+                 sx={{
+                   alignSelf: 'center',
+                   backgroundColor: 'darkblue',
+                   height: '35px',
+                   mt: 2, 
+                   width: '150%'
+                 }}>Login</Button>
+             </FormControl>
+
+             <Grid item >
               <Typography sx={{
-                textAlign: 'center',
                 fontSize: '22px',
-                pb: '5px',
-              }}>Don't have an account?</Typography>
-              <Button variant='contained' size='large'
-                onClick={goToCreateAccount}
-                sx={{
-                  alignSelf: 'center',
-                  backgroundColor: 'darkblue',
-                  height: '35px',
-                }}>Sign Up</Button>
-            </FormGroup>
-          </Grid>
+                alignSelf: 'center',
+                mt: 3
+              }}>
+                Don't have an account?
+              </Typography>
+            </Grid>
+
+            <Grid item>
+              <Link onClick={goToCreateAccount} tabIndex={0} component="button" style={{textDecoration: 'none'}}>
+                <Typography sx={{
+                  fontSize: '16px',
+                  alignSelf: 'left',
+                }}>
+                  Sign Up Here
+                </Typography>
+              </Link>          
+            </Grid>
+          </Box>
         </Grid>
-        <Box style={boxStyle} marginTop='0px'>
-          <Canvas style={{width: "50vw", height: "70vh"}}>
-            <Suspense fallback={null}>
-            <OrbitControls enableZoom={false}/>
-            <ambientLight intensity={0.5}/>
-            <pointLight position={[5, 5, 5]} intensity={1}/>
-              <Model rotation={[0, -90, 0]}/>
-            </Suspense>
-          </Canvas>
-        </Box>
-      </Box>
+        <Grid item>
+          <img style={{ width: '45vw', height: '64vh' }} src={pantry} alt="pantry" />
+        </Grid>
+      </Grid>
     </div>
   );
 }

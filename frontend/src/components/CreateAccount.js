@@ -2,13 +2,12 @@
 
 import * as React from 'react';
 import {useNavigate} from 'react-router-dom';
-import {FormGroup, TextField, Typography} from '@mui/material';
-import Box from '@mui/material/Box';
+import {FormGroup, TextField, Typography, Link, Paper, Stack} from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import {useAuth} from './AuthProvider';
 /**
- * Component that displays the Login Page.
+ * Component that displays the Create Account Page.
  *
  * @return {object} JSX
  */
@@ -20,7 +19,6 @@ function CreateAccount() {
 
   const handleInputChange = (event) => {
     const {value, name} = event.target;
-    console.log(value, name);
     const u = user;
     u[name] = value;
     setUser(u);
@@ -29,10 +27,9 @@ function CreateAccount() {
   const handlePasswordVerification = (event) => {
     const value = event.target.value;
     setPassword(value);
-    //   .then(() => {
-    // });
   };
 
+  //handles when user presses the create account button
   const onCreateSubmit = (event) => {
     event.preventDefault();
 
@@ -62,57 +59,65 @@ function CreateAccount() {
     }
   };
 
-  const onReturnSubmit = (event) => {
+  const onReturnSubmit = () => {
     navigate('/');
   };
 
+ 
   return (
-    <Box sx={{
-      width: '50%',
+    <div 
+    style={{
       display: 'flex',
-      flexDirection: 'column',
-      pt: '5%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '100vh',
     }}>
-      <Grid container direction={'column'} columns={1} spacing={3}
-        justifyContent='center' alignItems={'center'}>
-        <Grid item>
+      <Paper elevation={3} variant="outlined" sx={{
+        pt: 5,
+        pb: 5,
+        px: 14,
+        margin: 'auto',
+        maxWidth: 1000,
+      }}>
+        <Grid container spacing={2} justify="center" direction="column" align="center">
+          <Grid item>
           <FormGroup sx={{
             justifyContent: 'center',
             alignContent: 'center',
             verticalAlign: 'center',
-          }}>
-            <Typography sx={{
-              textAlign: 'center',
-              fontSize: '26px',
-              pb: '25px',
-            }}>Create an Account</Typography>
-            <TextField label='Username' size='small'
+         }}>
+           <Typography sx={{
+               textAlign: 'center',
+               fontSize: '26px',
+               pb: '25px',
+             }}>Create an Account</Typography>
+             <TextField label='Username' size='small'
               onChange={handleInputChange} name='name'
               sx={{
                 alignSelf: 'center',
                 pb: '20px',
-                minWidth: '100px',
+                width: '150%',
               }}/>
             <TextField label='Email' size='small'
               onChange={handleInputChange} name='email'
               sx={{
                 alignSelf: 'center',
                 pb: '20px',
-                minWidth: '100px',
+                width: '150%',
               }}/>
             <TextField label='Password' size='small'
               onChange={handleInputChange} name='password'
               sx={{
                 alignSelf: 'center',
                 pb: '20px',
-                minWidth: '100px',
+                width: '150%',
               }}/>
             <TextField label='Confirm Password' size='small'
               onChange={handlePasswordVerification}
               sx={{
                 alignSelf: 'center',
                 pb: '20px',
-                minWidth: '100px',
+                width: '150%',
               }}/>
             <Button variant='contained' size='large'
               onClick={onCreateSubmit}
@@ -122,17 +127,20 @@ function CreateAccount() {
                 height: '35px',
               }}>Sign Up</Button>
           </FormGroup>
-        </Grid>
-        <Grid item>
-          <Button variant='contained' size='large'
-            onClick={onReturnSubmit} sx={{
-              alignSelf: 'center',
-              backgroundColor: 'darkblue',
-              height: '35px',
-            }}>Return</Button>
-        </Grid>
-      </Grid>
-    </Box>
+          </Grid>
+          <Grid item>
+            <Link onClick={onReturnSubmit} tabIndex={0} component="button" style={{textDecoration: 'none'}}>
+              <Typography sx={{
+                textAlign: 'center',
+                fontSize: '16px',
+              }}>
+                Return to Login
+              </Typography>
+            </Link>     
+          </Grid>
+        </Grid>           
+      </Paper>
+    </div>
   );
 }
 

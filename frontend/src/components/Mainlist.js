@@ -9,29 +9,16 @@ import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
 import './Mainlist.css';
 import {dataBaseContext} from './App';
-import { Dialog, ListItemButton } from '@mui/material';
+import { Dialog, ListItemButton, Typography } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import EditDialog from './EditDialog';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
-/*
-      <button onClick={addItemButton} className='addItemButton'>+</button>
-      <input
-        id="test"
-        type="text"
-        className='addItemTextbox'
-        placeholder='Input an item to add...'/>
-        */
-
-/**
- * Simple component with no state.
- *
- * @return {object} maintest
- */
-
- const editItemContext = React.createContext();
+const editItemContext = React.createContext();
 
 export default function Mainlist() {
   const context = React.useContext(dataBaseContext);
@@ -108,14 +95,13 @@ export default function Mainlist() {
   }
 
 
-
   return (
-    <div className='mainList'>
-      <p className='listName'>{listTitle}</p>
+    <div className='mainList' >
+      <Typography variant="h4" mt={1} ml={2}>{listTitle}</Typography>
       <div>
-      <List key={'toolbar'} sx={{ mt: 5 }} component={Stack} direction="row">
+      <List key={'toolbar'} sx={{ mt: 1}} component={Stack} direction="row">
         <ListItem key={'item'}>
-          <ListItemText primary="Item" />
+          <ListItemText primary="Item"/>
         </ListItem>
         <ListItem key={'amount'}>
           <ListItemText primary="Amount" />
@@ -136,7 +122,7 @@ export default function Mainlist() {
           <ListItemButton disabled={true}/>
         </ListItem>
       </List>
-      {itemList.map((object, index) => (
+      {itemList.map((object) => (
             <List component={Stack} direction="row" spacing={0}
               key={String(object.id).concat('list')}>
               <ListItem key={String(object.id).concat('item')}>
@@ -157,13 +143,13 @@ export default function Mainlist() {
               <ListItem key={String(object.id).concat('edit')}>
                   <ListItemButton role={'button'} color='blue' key={'editButton'}
                      onClick={() => {handleClickOpen(object)}}>
-                  <ListItemText primary={'Edit'} key={'text'}/>
+                      <EditIcon/>
                   </ListItemButton>
               </ListItem>
               <ListItem >
                   <ListItemButton role={'button'} color='blue' key={'deleteButton'}
                      onClick={() => {handleDeleteClick(object)}}>
-                  <ListItemText primary={'Delete'} key={'text'}/>
+                      <DeleteIcon/>
                   </ListItemButton>
               </ListItem>
            </List>
@@ -213,20 +199,3 @@ export {
   editItemContext,
 };
 
-/**
- * Adds an item to the list
- *
- * @return {object} True or False
-function addItemButton() {
-  if (document.getElementById('test').value) {
-    const itemText = document.getElementById('test').value;
-    const newListItem = document.createElement('li');
-    newListItem.appendChild(document.createTextNode(itemText));
-    const mainItemList = document.getElementById('mainItemList');
-    mainItemList.appendChild(newListItem);
-    document.getElementById('test').value = '';
-    return true;
-  }
-  return false;
-}
-*/
