@@ -141,7 +141,7 @@ export default function Mainlist() {
                 <ListItemText primary= {printTags(object.tags)} />
               </ListItem>
               <ListItem key={String(object.id).concat('edit')}>
-                  <ListItemButton role={'button'} color='blue' key={'editButton'}
+                  <ListItemButton aria-label='test' role={'button'} color='blue' key={'editButton'}
                      onClick={() => {handleClickOpen(object)}}>
                       <EditIcon/>
                   </ListItemButton>

@@ -11,7 +11,6 @@ import {useLocalStorage} from './UseLocalStorage';
 
 import MainScreen from './MainScreen';
 import './App.css';
-import Fridge from './fridge.js';
 import background from '../asset/background.jpg';
 
 

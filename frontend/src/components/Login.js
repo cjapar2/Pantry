@@ -7,10 +7,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import {useAuth} from './AuthProvider';
-import {Canvas} from '@react-three/fiber';
-import {OrbitControls} from '@react-three/drei';
-import Model from './fridge_model';
-import { Suspense } from 'react'  
 
 import pantry from '../asset/pantry.jpg'
 
@@ -95,14 +91,14 @@ function Login() {
                  fontSize: '26px',
                  pb: '25px',
                }}>Welcome to Pantry</Typography>
-               <TextField label='Email' size='small'
+               <TextField aria-label='Email' size='small'
                  onChange={handleInputChange} name='email' fullWidth required
                  sx={{
                    alignSelf: 'center',
                    pb: '20px',
                    width: '150%'
                  }}/>
-               <TextField label='Password' size='small' type="password"
+               <TextField aria-label='Password' size='small' type="password"
                  onChange={handleInputChange} name='password' required
                  sx={{
                    alignSelf: 'center',
