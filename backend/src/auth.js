@@ -14,8 +14,8 @@ const pool = new Pool({
 
 exports.authenticate = async (req, res) => {
   const user = await db.getUser(req.body);
-  console.log(user);
-  if(user){
+  // console.log(user);
+  if(user) {
     if (user.length != 0 && bcrypt.compareSync(req.body.password, user.usr.password)) {
       const accessToken = jwt.sign(
         {email: user.usr.email}, 
@@ -28,20 +28,8 @@ exports.authenticate = async (req, res) => {
       res.status(401).send();
     }
   }
-  else{
+  else {
     console.log("account not found");
-  // console.log(user);
-
-  if (user.length != 0 && bcrypt.compareSync(req.body.password, user.usr.password)) {
-    const accessToken = jwt.sign(
-      {email: user.usr.email}, 
-      secrets.accessToken, {
-        // expiresIn: '30m',
-        algorithm: 'HS256'
-      });
-    res.status(200).json({id: user.id, name: user.usr.name, accessToken: accessToken});
-  } else {
-    res.status(401).send();
   }
 };
 

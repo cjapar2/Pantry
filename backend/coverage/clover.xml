@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1670192533904" clover="3.2.0">
-  <project timestamp="1670192533905" name="All files">
-    <metrics statements="330" coveredstatements="169" conditionals="34" coveredconditionals="9" methods="54" coveredmethods="20" elements="418" coveredelements="198" complexity="0" loc="330" ncloc="330" packages="2" files="8" classes="8"/>
+<coverage generated="1670193045204" clover="3.2.0">
+  <project timestamp="1670193045205" name="All files">
+    <metrics statements="332" coveredstatements="171" conditionals="36" coveredconditionals="11" methods="54" coveredmethods="20" elements="422" coveredelements="202" complexity="0" loc="332" ncloc="332" packages="2" files="8" classes="8"/>
     <package name="src">
-      <metrics statements="316" coveredstatements="155" conditionals="34" coveredconditionals="9" methods="52" coveredmethods="18"/>
+      <metrics statements="318" coveredstatements="157" conditionals="36" coveredconditionals="11" methods="52" coveredmethods="18"/>
       <file name="app.js" path="C:\Users\Alanna\Documents\Homework\CSE 115A\Pantry\Pantry\backend\src\app.js">
         <metrics statements="40" coveredstatements="40" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
@@ -48,7 +48,7 @@
         <line num="71" count="2" type="stmt"/>
       </file>
       <file name="auth.js" path="C:\Users\Alanna\Documents\Homework\CSE 115A\Pantry\Pantry\backend\src\auth.js">
-        <metrics statements="22" coveredstatements="19" conditionals="8" coveredconditionals="5" methods="3" coveredmethods="3"/>
+        <metrics statements="24" coveredstatements="21" conditionals="10" coveredconditionals="7" methods="3" coveredmethods="3"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -57,20 +57,22 @@
         <line num="7" count="2" type="stmt"/>
         <line num="15" count="2" type="stmt"/>
         <line num="16" count="9" type="stmt"/>
-        <line num="19" count="9" type="cond" truecount="3" falsecount="1"/>
+        <line num="18" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="19" count="8" type="cond" truecount="3" falsecount="1"/>
         <line num="20" count="8" type="stmt"/>
         <line num="26" count="8" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
-        <line num="32" count="2" type="stmt"/>
-        <line num="33" count="2" type="stmt"/>
-        <line num="34" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="35" count="2" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
         <line num="36" count="2" type="stmt"/>
-        <line num="37" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="38" count="0" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="38" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="39" count="2" type="stmt"/>
         <line num="40" count="2" type="stmt"/>
-        <line num="41" count="2" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
+        <line num="41" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="45" count="2" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
       </file>
       <file name="db.js" path="C:\Users\Alanna\Documents\Homework\CSE 115A\Pantry\Pantry\backend\src\db.js">
         <metrics statements="154" coveredstatements="58" conditionals="4" coveredconditionals="2" methods="31" coveredmethods="8"/>
