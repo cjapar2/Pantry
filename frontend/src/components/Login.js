@@ -91,14 +91,14 @@ function Login() {
                  fontSize: '26px',
                  pb: '25px',
                }}>Welcome to Pantry</Typography>
-               <TextField aria-label='Email' size='small'
+               <TextField aria-label='Email' label="Email" size='small'
                  onChange={handleInputChange} name='email' fullWidth required
                  sx={{
                    alignSelf: 'center',
                    pb: '20px',
                    width: '150%'
                  }}/>
-               <TextField aria-label='Password' size='small' type="password"
+               <TextField aria-label='Password' label="Password" size='small' type="password"
                  onChange={handleInputChange} name='password' required
                  sx={{
                    alignSelf: 'center',
