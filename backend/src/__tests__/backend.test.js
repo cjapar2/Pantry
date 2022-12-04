@@ -11,27 +11,23 @@ let token;
 
 
 
-beforeAll( async () => {
+beforeAll(() => {
   server = http.createServer(app);
   server.listen();
   request = supertest(server);
-  const response = await supertest(server).post('/v0/authentication').send(account);
-  token = response;
   return db.reset();
 });
-
-console.log(token);
 
 afterAll((done) => {
   server.close(done);
 });
+
 
 beforeEach(async () => {
   await request.post('/v0/authenticate')
   .send(account)
   .expect(200)
     .then((res) => {
-      console.log(res.body);
       token = res.body.accessToken;
     });
 });
@@ -92,7 +88,6 @@ test('POST /food', async () => {
     .then((res) => {
       expect(res).toBeDefined();
       expect(res.body).toBeDefined();
-      console.log(res.body);
       expect(res.body.item).toEqual('cookies');
     });
 });
@@ -114,7 +109,7 @@ test('GET /signup', async () => {
   .expect(200)
   .then((res) => {
     expect(res).toBeDefined();
-    expect(res.body.rows).toBeDefined();
-    expect(res.body.rows[1].usr.name).toEqual('CJ');
+    expect(res.body).toBeDefined();
+    expect(res.body[1].usr.name).toEqual('CJ');
   });
 });

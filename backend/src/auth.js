@@ -29,7 +29,7 @@ exports.authenticate = async (req, res) => {
     }
   }
   else {
-    console.log("account not found");
+    res.status(401).send();
   }
 };
 
