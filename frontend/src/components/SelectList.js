@@ -13,6 +13,7 @@ export default function SelectList() {
   const {setCurrentList, availableLists, setListTitle,
     listId, setListId} = context;
 
+  // Sets the current list to the one selected
   const handleChange = (event) => {
     let list = availableLists.filter(obj => {
       return obj.id === event.target.value;

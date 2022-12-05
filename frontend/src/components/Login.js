@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import {useNavigate} from 'react-router-dom';
-import {FormControl, FormGroup, TextField, Typography, Link, Paper} from '@mui/material';
+import {FormControl, TextField, Typography, Link, Paper} from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -20,9 +20,9 @@ function Login() {
   const authentication = useAuth();
   const navigate = useNavigate();
 
+  // changes state variables when login form is changed
   const handleInputChange = (event) => {
     const {value, name} = event.target;
-    // console.log(value, name);
     const u = user;
     u[name] = value;
     setUser(u);
@@ -32,6 +32,7 @@ function Login() {
     navigate('/createaccount');
   };
 
+  // makes login api call, sets user, goes to mainscreen
   const onLoginSubmit = (event) => {
     event.preventDefault();
 

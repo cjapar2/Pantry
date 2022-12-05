@@ -11,7 +11,6 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
-import {useAuth} from './AuthProvider';
 import {dataBaseContext} from './App';
 
 
@@ -21,6 +20,7 @@ export default function ShareList() {
   const [selectedList, setSelectedList] = React.useState({});
   const [openShare, setOpenShare] = React.useState(false);
 
+  // Sets the list to share and opens popup to display the list id
   const handleChange = (event) => {
     let list = availableLists.filter(obj => {
       return obj.id === event.target.value;
@@ -30,6 +30,7 @@ export default function ShareList() {
     setOpenShare(true);
   };
 
+  // Closes the popup
   function handleClose (){
     setOpenShare(false);
   };

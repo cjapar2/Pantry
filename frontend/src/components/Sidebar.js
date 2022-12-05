@@ -117,9 +117,7 @@ export default function Sidebar() {
         }
         return res.json();
       })
-        .then((json) => {
-          //availableLists.push(json);
-          //setAvailableLists(availableLists);
+        .then(() => {
           setData(!data);
           setCreateOpen(false);
         })
@@ -204,8 +202,7 @@ export default function Sidebar() {
               </Box>
             </Modal>
           </li>
-          {/* <li> <a href="test3">Other Stuff</a></li> */}
-          {/* <li> <a href="test4">Settings</a></li> */}
+          {/* Dropdowns to select lists */}
           <li> <Typography> Select List to Share:</Typography></li>
           <li> <ShareList /> </li>
           <li> <Typography> Select List to View/Edit:</Typography> </li>

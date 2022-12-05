@@ -32,6 +32,8 @@ export default function Mainlist() {
   const authentication = useAuth();
   const token = authentication.getToken();
 
+  // Gets the items in the currently selected list.
+  // Updates whenever the list is changed.
   async function checkList() {
     console.log(currentList);
     fetch(`http://localhost:3010/v0/foodInList/${listId}`, {
@@ -54,6 +56,7 @@ export default function Mainlist() {
     })
   }
 
+  //Fetches the list if one is selected
   const updateList = () => {
     if (listId) {
       checkList();
@@ -64,22 +67,25 @@ export default function Mainlist() {
     updateList();
   }, [data, currentList])
 
+  // Opens Edit popup
   function handleClickOpen (item) {
     setEditItem(item);
     setOpen(true);
   };
 
+  // Opens delete popup
   function handleDeleteClick (item){
     setOpenDelete(true);
     setDeleteItem(item);
     console.log(openDelete);
   };
 
-  
+  // Closes delete popup
   function handleClose (){
     setOpenDelete(false);
   };
 
+  // Deletes an item from the list and closes popup
   function deletingItem (){
     fetch(`http://localhost:3010/v0/food/${deleteItem.id}`, {
       method: 'DELETE',

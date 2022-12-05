@@ -10,7 +10,7 @@ import {useAuth} from './AuthProvider';
 import {dataBaseContext} from './App';
 
 /**
- * Simple component with no state.
+ * Wrapper component for the mainscreen (list, add item..)
  *
  * @return {object} JSX
  */
@@ -21,6 +21,7 @@ export default function MainScreen() {
   const data = context.dataChanged;
   const id = authentication.getID();
 
+  // Changes the list title based on whether or not the list exists/is empty
   const selectList = (listArray) => {
     console.log(listArray);
 
@@ -38,6 +39,7 @@ export default function MainScreen() {
     }
   }
 
+  // Fetches all lists that the user is associated with.
   const getUserLists = async () => {
     await fetch(`http://localhost:3010/v0/lists/${id}`, {
       method: 'GET',
@@ -53,7 +55,6 @@ export default function MainScreen() {
       return res.json();
     })
     .then((json) => {
-      console.log(json);
       selectList(json);
       setAvailableLists(json);
     }) 
