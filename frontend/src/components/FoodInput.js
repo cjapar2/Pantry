@@ -1,19 +1,31 @@
 /* eslint-disable */
 
-
 import React, {useState} from 'react';
 import './Rightbar.css';
-import './FoodInput.js';
 import {useAuth} from './AuthProvider';
 import {dataBaseContext} from './App';
 import {Typography, Stack, Button} from '@mui/material';
+import Box from '@mui/material/Box';
+
+const boxStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 500,
+  height: 800,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 /**
  * Simple component with no state.
  *
  * @return {object} JSX
  */
-export default function Rightbar() {
+export default function FoodInput() {
   // Create a date object from a date string
   const currentDate = new Date();
 
@@ -24,7 +36,7 @@ export default function Rightbar() {
 
   // Generate yyyy-mm-dd date string
   const formattedDate = year + '-' + month + '-' + day;
-
+  
   // State elements of food item object
   const [item, setItem] = useState('');
   const [amount, setAmount] = useState(0);
@@ -34,6 +46,7 @@ export default function Rightbar() {
   const tags = {};
   const authentication = useAuth();
 
+  
   // Context
   const context = React.useContext(dataBaseContext);
   const setData = context.setDataChanged;
@@ -86,82 +99,84 @@ export default function Rightbar() {
   const tagNames = ['Shared', 'Dairy', 'Meat', 'Produce', 'Spice'];
   return (
     <div>
-    <form onSubmit={nameSubmit}>
-      <div className='rightbar'>
-        <div className='rightbar-buttons'>
-          <ul>
-            <li className='boxLabel'>
-              <Typography variant='h6'>
-              Name of Item
-              </Typography>
-            </li>
-            <li><input
-              id='itemName'
-              type='text'
-              className='addItemName'
-              placeholder='Item Name'
-              onChange={(e) => setItem(e.target.value)}
-            />
-            </li>
-            <li></li>
-            <Stack direction='row' spacing={2} >
-              <li className='boxLabel'><Typography variant='h6'>
-                Item Quantity</Typography>
-              </li>
-              <li className='boxLabel'><Typography variant='h6'>
-                Date Purchased</Typography>
-              </li>
-            </Stack>
+			<Box sx={boxStyle}>
+				<Typography id="modal-modal-title"
+					variant="h4"
+				>
+					Add an item
+					</Typography>
+					<Typography/>
+					<form onSubmit={nameSubmit}>
+						<ul>
+							<li className='listItem'>
+								<Typography variant='h6'>
+									Name of Item
+								</Typography>
+								<input
+									id='itemName'
+									type='text'
+									className='addItemName'
+									placeholder='Item Name'
+									onChange={(e) => setItem(e.target.value)}
+								/>
+							</li>
+							<li className='listItem'>
+								<Stack direction='row' spacing={5}>
+									<li ><Typography variant='h6'>
+										Item Quantity</Typography>
+									</li>
+									<li ><Typography variant='h6'>
+										Date Purchased</Typography>
+									</li>
+								</Stack>
+								<Stack direction='row' spacing={10}>
+									<input
+										id='itemCount'
+										type='number'
+										min='0'
+										className='addItemCount'
+										onChange={(e) => setAmount(e.target.value)}
+									/>
 
-            <Stack direction='row' spacing={10} >
-            <input
-              id='itemCount'
-              type='number'
-              className='addItemCount'
-              placeholder=''
-              onChange={(e) => setAmount(e.target.value)}/>
-
-            <li><input
-              id='itemDate'
-              type='date'
-              className='addItemDate'
-              placeholder='Input an item to add...'
-              onChange={(e) => setPurchaseDate(e.target.value)}/></li>
-            </Stack>
-
-            <li className='boxLabel'>
-              <Typography variant='h6'>Description of Item</Typography>
-            </li>
-            <li><textarea
-              id='itemDesc'
-              type='text'
-              className='addItemDesc'
-              placeholder='Write a description for your item...'
-              onChange={(e) => setNotes(e.target.value)}/></li>
-
-            <li className='boxLabel'>
-              <Typography variant='h6'>Tags</Typography>
-            </li>
-            <div className='tags'>
-            {createTagButtons(tagNames, updateTags)}
-            </div>
-
-            <li className='buttonLi'>
-            <Button variant='contained' type='submit' size='large' fullWidth
-                 sx={{
-                   alignSelf: 'center',
-                   backgroundColor: 'rgb(82, 179, 54)',
-                   height: '35px',
-                   ml: 1,
-                   width: '90%',
-                 }}>Add Item</Button>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </form>
+									<input
+										id='itemDate'
+										type='date'
+										className='addItemDate'
+										onChange={(e) => setPurchaseDate(e.target.value)}
+									/>
+								</Stack>
+								<li className='boxLabel'>
+									<Typography variant='h6'>Description of Item</Typography>
+								</li>
+								<li><textarea
+									id='itemDesc'
+									type='text'
+									className='addItemDesc'
+									placeholder='Write a description for your item...'
+									onChange={(e) => setNotes(e.target.value)}/>
+								</li>
+								<li className='boxLabel'>
+									<Typography variant='h6'>Tags</Typography>
+								</li>
+								<div className='tags'>
+									{createTagButtons(tagNames, updateTags)}
+								</div>
+								<li className='buttonLi'>
+								<Button variant='contained' type='submit' size='large' fullWidth
+									sx={{
+										alignSelf: 'center',
+										backgroundColor: 'rgb(82, 179, 54)',
+										height: '35px',
+										ml: 1,
+										width: '90%',
+									}}>Add Item</Button>
+								</li>
+							</li>
+						</ul>
+					</form>
+			</Box>
     </div>
-  );
+  )
 }
 
 /**

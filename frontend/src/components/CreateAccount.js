@@ -1,5 +1,6 @@
 /* eslint-disable */
 
+
 import * as React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {FormGroup, TextField, Typography, Link, Paper, Stack} from '@mui/material';
@@ -107,6 +108,7 @@ function CreateAccount() {
               }}/>
             <TextField label='Password' size='small'
               onChange={handleInputChange} name='password'
+              secureTextEntry={true}
               sx={{
                 alignSelf: 'center',
                 pb: '20px',

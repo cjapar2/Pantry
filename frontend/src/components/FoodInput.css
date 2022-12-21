@@ -1,0 +1,17 @@
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.listItem {
+    margin: 20px 0;
+}
+
+.boxLabel {
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.tags{
+  margin-bottom: 8%;
+}

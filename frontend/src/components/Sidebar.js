@@ -1,11 +1,11 @@
-/* eslint-disable */
+
 
 import React from 'react';
 import SelectList from './SelectList';
-import { Typography, Button, Modal, Box, Stack } from '@mui/material';
+import {Typography, Button, Modal, Box, Stack} from '@mui/material';
 import './Sidebar.css';
-import { useAuth } from './AuthProvider';
-import { dataBaseContext } from './App';
+import {useAuth} from './AuthProvider';
+import {dataBaseContext} from './App';
 import DeleteList from './DeleteList';
 import ShareList from './ShareList';
 
@@ -23,14 +23,14 @@ const style = {
 };
 
 const buttonStyle = {
-  width: "125px"
+  width: '125px',
 };
 
 const listStyle = {
   'listStyle': 'none',
-  padding: 0,
-  margin: 0,
-  marginBottom: '10px'
+  'padding': 0,
+  'margin': 0,
+  'marginBottom': '10px',
 };
 
 /**
@@ -39,7 +39,6 @@ const listStyle = {
  * @return {object} JSX
  */
 export default function Sidebar() {
-  
   // State of elements
   const [joinOpen, setJoinOpen] = React.useState(false);
   const [createOpen, setCreateOpen] = React.useState(false);
@@ -47,30 +46,29 @@ export default function Sidebar() {
   const [joinGroupId, setjoinGroupId] = React.useState('');
   const authentication = useAuth();
 
-  //Context
+  // Context
   const context = React.useContext(dataBaseContext);
-  const {availableLists, setAvailableLists} = context;
   const setData = context.setDataChanged;
   const data = context.dataChanged;
 
   const CreateCancel = () => {
-    setCreateOpen(false)
+    setCreateOpen(false);
   };
 
   const joinCancel = () => {
-    setJoinOpen(false)
+    setJoinOpen(false);
   };
-  
+
   const joinSubmit = (event) => {
     event.preventDefault();
     console.log(authentication.getID());
     console.log(joinGroupId);
     const itemobj = {
-      "usr_id": parseInt(authentication.getID()),
-      "list_id": parseInt(joinGroupId),
-    }
+      'usr_id': parseInt(authentication.getID()),
+      'list_id': parseInt(joinGroupId),
+    };
     console.log(JSON.stringify(itemobj));
-    fetch ('http://localhost:3010/v0/users_lists', {
+    fetch('http://localhost:3010/v0/users_lists', {
       method: 'POST',
       body: JSON.stringify(itemobj),
       headers: {
@@ -79,29 +77,29 @@ export default function Sidebar() {
         'Authorization': `Bearer ${authentication.getToken()}`,
       },
     })
-    .then((res) => {
-      if (!res.ok) {
-        throw res;
-      }
-      return res.json();
-    })
-    .then((json) => {
-      setData(!data);
-      console.log(createOpen);
-      setJoinOpen(false);
-    })
-    .catch((err) => {
-      alert(err);
-    });
+      .then((res) => {
+        if (!res.ok) {
+          throw res;
+        }
+        return res.json();
+      })
+      .then((json) => {
+        setData(!data);
+        console.log(createOpen);
+        setJoinOpen(false);
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
 
   const createSubmit = (event) => {
     event.preventDefault();
 
     const listObject = {
-      "list_name": listName
+      'list_name': listName,
     };
-    
+
     fetch(`http://localhost:3010/v0/lists/${authentication.getID()}`, {
       method: 'POST',
       body: JSON.stringify(listObject),
@@ -117,14 +115,14 @@ export default function Sidebar() {
         }
         return res.json();
       })
-        .then(() => {
-          setData(!data);
-          setCreateOpen(false);
-        })
-        .catch((err) => {
-          alert(err);
-        });
-  }
+      .then(() => {
+        setData(!data);
+        setCreateOpen(false);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
 
   return (
     <div className='sidebar'>
@@ -143,22 +141,30 @@ export default function Sidebar() {
               onClose={() => setJoinOpen(false)}
             >
               <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
+                <Typography id="modal-modal-title"
+                  variant="h6"
+                  component="h2"
+                >
                   Join a List
                 </Typography>
-                <Typography id="modal-modal-description" class="joinGroup" sx={{ mt: 2 }}>
+                <Typography id="modal-modal-description"
+                  class="joinGroup"
+                  sx={{mt: 2}}
+                >
                   <form>
                     <Stack spacing={1}>
-                      <Typography id="modal-modal-title" variant="subtitle1" component="h2">
+                      <Typography id="modal-modal-title"
+                        variant="subtitle1"
+                        component="h2"
+                      >
                         Enter the group ID of the group you want to join.
                       </Typography>
-                      <input
-                        id="groupID"
+                      <input id="groupID"
                         type="text"
                         placeholder="Group ID"
                         onChange={(e) => setjoinGroupId(e.target.value)}
                       />
-                      <Stack direction="row" spacing={2} justifyContent="center">
+                      <Stack direction="row"spacing={2} justifyContent="center">
                         <button onClick={joinSubmit}>Join Group</button>
                         <button onClick={joinCancel} >Cancel</button>
                       </Stack>

@@ -54,6 +54,7 @@ exports.getUsersToLists = async (req, res) => {
   res.status(200).json(usersToLists);
 };
 
+// Adds existing list to the user (join functionality)
 exports.newUserListConc = async (req, res) => {
   const user = await db.findUser(req.body.usr_id);
   if (!user) {

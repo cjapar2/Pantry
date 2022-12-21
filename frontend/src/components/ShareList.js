@@ -1,4 +1,4 @@
-/* eslint-disable */
+
 
 import React from 'react';
 import InputLabel from '@mui/material/InputLabel';
@@ -14,6 +14,11 @@ import Button from '@mui/material/Button';
 import {dataBaseContext} from './App';
 
 
+/**
+ * Function that handles sharing lists
+ *
+ * @return {object} JSX
+ */
 export default function ShareList() {
   const context = React.useContext(dataBaseContext);
   const {availableLists} = context;
@@ -22,7 +27,7 @@ export default function ShareList() {
 
   // Sets the list to share and opens popup to display the list id
   const handleChange = (event) => {
-    let list = availableLists.filter(obj => {
+    const list = availableLists.filter((obj) => {
       return obj.id === event.target.value;
     });
 
@@ -30,22 +35,27 @@ export default function ShareList() {
     setOpenShare(true);
   };
 
-  // Closes the popup
-  function handleClose (){
+  /**
+   * Closes the popup
+   *
+   */
+  function handleClose() {
     setOpenShare(false);
   };
 
   return (
     <div>
-      <FormControl sx={{ m: 1, minWidth: 120,}} size="small">
-        <InputLabel sx={{ color: 'black'}} id="Select List">List Name</InputLabel>
+      <FormControl sx={{m: 1, minWidth: 120}} size="small">
+        <InputLabel sx={{color: 'black'}} id="Select List">
+          List Name
+        </InputLabel>
         <Select
           value={''}
           label="List Name"
           onChange={handleChange}
         >
           {availableLists.map((list) =>
-            <MenuItem key={list.id} value={list.id}>{list.list_name}</MenuItem>
+            <MenuItem key={list.id} value={list.id}>{list.list_name}</MenuItem>,
           )}
         </Select>
       </FormControl>
@@ -53,7 +63,8 @@ export default function ShareList() {
         <DialogTitle>Share List</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Share this code to have others join {selectedList.list_name}: {selectedList.id}
+            Share this code to have others join
+            {selectedList.list_name}: {selectedList.id}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

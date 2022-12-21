@@ -1,10 +1,9 @@
-/* eslint-disable */
+
 
 import {useState} from 'react';
 
 // Function/class to use local storage for user authentication
 export const useLocalStorage = (keyName, defaultValue) => {
-
   // Creates a react state variable to get authenticated user, if it exists
   const [storedValue, setStoredValue] = useState(() => {
     try {

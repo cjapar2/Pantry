@@ -1,4 +1,4 @@
-/* eslint-disable */
+
 
 import React from 'react';
 import InputLabel from '@mui/material/InputLabel';
@@ -8,6 +8,11 @@ import Select from '@mui/material/Select';
 import {dataBaseContext} from './App';
 
 
+/**
+ * Function to select between lists
+ *
+ * @return {object} JSX
+ */
 export default function SelectList() {
   const context = React.useContext(dataBaseContext);
   const {setCurrentList, availableLists, setListTitle,
@@ -15,7 +20,7 @@ export default function SelectList() {
 
   // Sets the current list to the one selected
   const handleChange = (event) => {
-    let list = availableLists.filter(obj => {
+    const list = availableLists.filter((obj) => {
       return obj.id === event.target.value;
     });
 
@@ -25,15 +30,15 @@ export default function SelectList() {
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120,}} size="small">
-      <InputLabel sx={{ color: 'black'}} id="Select List">Your Lists</InputLabel>
+    <FormControl sx={{m: 1, minWidth: 120}} size="small">
+      <InputLabel sx={{color: 'black'}} id="Select List">Your Lists</InputLabel>
       <Select
         value={listId}
         label="List Name"
         onChange={handleChange}
       >
         {availableLists.map((list) =>
-          <MenuItem key={list.id} value={list.id}>{list.list_name}</MenuItem>
+          <MenuItem key={list.id} value={list.id}>{list.list_name}</MenuItem>,
         )}
       </Select>
     </FormControl>

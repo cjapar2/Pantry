@@ -1,5 +1,6 @@
 /* eslint-disable */
 
+
 import React, {useEffect, useState} from 'react';
 import Button from '@mui/material/Button';
 import {useAuth} from './AuthProvider';
@@ -8,6 +9,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
 import './Mainlist.css';
+import './FoodInput.css';
 import {dataBaseContext} from './App';
 import { Dialog, ListItemButton, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -17,6 +19,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import AddIcon from '@mui/icons-material/Add';
+import IconButton from '@mui/material/IconButton';
+import Modal from '@mui/material/Modal';
+import FoodInput from './FoodInput';
 
 const editItemContext = React.createContext();
 
@@ -29,8 +35,49 @@ export default function Mainlist() {
   const [deleteItem, setDeleteItem] = React.useState({});
   const [open, setOpen] = React.useState(false);
   const [openDelete, setOpenDelete] = React.useState(false);
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const [item, setItem] = React.useState('');
   const authentication = useAuth();
   const token = authentication.getToken();
+
+  const nameSubmit = (event) => {
+    event.preventDefault();
+
+    if (listId) {
+      const itemObject = {
+        'item': item,
+        'amount': parseInt(amount),
+        'purchaseDate': purchaseDate,
+        'notes': notes,
+        'tags': tags,
+      };
+      console.log('itemObject');
+      console.log(itemObject);
+      fetch(`http://localhost:3010/v0/foodInList/${listId}`, {
+        method: 'POST',
+        body: JSON.stringify(itemObject),
+        headers: {
+          'accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authentication.getToken()}`,
+        },
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw res;
+          }
+          return res.json();
+        })
+        .then((json) => {
+          setData(!data);
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    } else {
+      alert('Please select a list to add the item in');
+    }
+  };
 
   // Gets the items in the currently selected list.
   // Updates whenever the list is changed.
@@ -56,7 +103,7 @@ export default function Mainlist() {
     })
   }
 
-  //Fetches the list if one is selected
+  // Fetches the list if one is selected
   const updateList = () => {
     if (listId) {
       checkList();
@@ -127,6 +174,14 @@ export default function Mainlist() {
         <ListItem key={'space1'}>
           <ListItemButton disabled={true}/>
         </ListItem>
+        {/* Button that opens the add food item modal popup */}
+        <ListItem>
+          <IconButton
+            onClick={() => setModalOpen(true)}
+          >
+            <AddIcon />
+          </IconButton>
+        </ListItem>
       </List>
       {itemList.map((object) => (
             <List component={Stack} direction="row" spacing={0}
@@ -179,6 +234,12 @@ export default function Mainlist() {
               </Button>
             </DialogActions>
           </Dialog>
+          <Modal
+            open={modalOpen}
+            onClose={() => setModalOpen(false)}
+          >
+            <FoodInput />
+          </Modal>
       </div>
     </div>
   );
