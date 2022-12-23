@@ -11,7 +11,7 @@ import Stack from '@mui/material/Stack';
 import './Mainlist.css';
 import './FoodInput.css';
 import {dataBaseContext} from './App';
-import { Dialog, ListItemButton, Typography } from '@mui/material';
+import { Dialog, ListItemButton, Tooltip, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import EditDialog from './EditDialog';
@@ -23,6 +23,7 @@ import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
 import FoodInput from './FoodInput';
+import Grid from '@mui/material/Grid';
 
 const editItemContext = React.createContext();
 
@@ -149,24 +150,37 @@ export default function Mainlist() {
 
 
   return (
-    <div className='mainList' >
-      <Typography variant="h4" mt={1} ml={2}>{listTitle}</Typography>
+    <div className='mainList'>
+      <List component={Stack} direction="row">
+        <ListItem>
+          <Typography variant="h5" mt={1}>{listTitle}</Typography>
+        </ListItem>
+        {/* Button that opens the add food item modal popup */}
+        <ListItem sx={{ justifyContent: "flex-end" }}>
+          <Tooltip title="Add Item" arrow>
+            <IconButton onClick={() => setModalOpen(true)}>
+              <AddIcon />
+            </IconButton>
+          </Tooltip>
+        </ListItem>
+      </List>
       <div>
-      <List key={'toolbar'} sx={{ mt: 1}} component={Stack} direction="row">
+      <List key={'toolbar'} sx={{mt: 1}} component={Stack} direction="row"
+      >
         <ListItem key={'item'}>
           <ListItemText primary="Item"/>
         </ListItem>
         <ListItem key={'amount'}>
           <ListItemText primary="Amount" />
         </ListItem>
-        <ListItem key={'date'}>
+        <ListItem key={'date'}>   
           <ListItemText primary="Date Purchased" />
-        </ListItem>
-        <ListItem key={'notes'}>
-          <ListItemText primary="Notes" />
         </ListItem>
         <ListItem key={'tags'}>
           <ListItemText primary="Tags" />
+        </ListItem>
+        <ListItem key={'notes'}>
+          <ListItemText primary="Notes" />
         </ListItem>
         <ListItem key={'edit'}>
           <ListItemButton disabled={true}/>
@@ -174,45 +188,37 @@ export default function Mainlist() {
         <ListItem key={'space1'}>
           <ListItemButton disabled={true}/>
         </ListItem>
-        {/* Button that opens the add food item modal popup */}
-        <ListItem>
-          <IconButton
-            onClick={() => setModalOpen(true)}
-          >
-            <AddIcon />
-          </IconButton>
-        </ListItem>
       </List>
       {itemList.map((object) => (
-            <List component={Stack} direction="row" spacing={0}
+            <List component={Stack} direction="row"
               key={String(object.id).concat('list')}>
-              <ListItem key={String(object.id).concat('item')}>
-                <ListItemText primary={object.item} />
-              </ListItem>
-              <ListItem key={String(object.id).concat('amount')}>
-                <ListItemText primary={object.amount} />
-              </ListItem>
-              <ListItem key={String(object.id).concat('date')}>
-                <ListItemText primary={formatDate(object.purchasedate)} />
-              </ListItem> 
-              <ListItem key={String(object.id).concat('notes')}>
-                <ListItemText primary={object.notes} />
-              </ListItem>
-              <ListItem key={String(object.id).concat('tags')}>
-                <ListItemText primary= {printTags(object.tags)} />
-              </ListItem>
-              <ListItem key={String(object.id).concat('edit')}>
-                  <ListItemButton aria-label='test' role={'button'} color='blue' key={'editButton'}
-                     onClick={() => {handleClickOpen(object)}}>
-                      <EditIcon/>
-                  </ListItemButton>
-              </ListItem>
-              <ListItem >
-                  <ListItemButton role={'button'} color='blue' key={'deleteButton'}
-                     onClick={() => {handleDeleteClick(object)}}>
-                      <DeleteIcon/>
-                  </ListItemButton>
-              </ListItem>
+                <ListItem key={String(object.id).concat('item')}>
+                  <ListItemText primary={object.item} />
+                </ListItem>
+                <ListItem key={String(object.id).concat('amount')}>
+                  <ListItemText primary={object.amount} />
+                </ListItem>
+                <ListItem key={String(object.id).concat('date')}>
+                  <ListItemText primary={formatDate(object.purchasedate)} />
+                </ListItem> 
+                <ListItem key={String(object.id).concat('tags')}>
+                  <ListItemText primary= {printTags(object.tags)} />
+                </ListItem>
+                <ListItem key={String(object.id).concat('notes')}>
+                  <ListItemText primary={object.notes} />
+                </ListItem>
+                <ListItem key={String(object.id).concat('edit')}>
+                    <ListItemButton aria-label='test' role={'button'} color='blue' key={'editButton'}
+                      onClick={() => {handleClickOpen(object)}}>
+                        <EditIcon/>
+                    </ListItemButton>
+                </ListItem>
+                <ListItem>
+                    <ListItemButton role={'button'} color='blue' key={'deleteButton'}
+                      onClick={() => {handleDeleteClick(object)}}>
+                        <DeleteIcon/>
+                    </ListItemButton>
+                </ListItem>
            </List>
           ))}
           <editItemContext.Provider value={{open, setOpen, editItem}}>
