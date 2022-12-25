@@ -19,11 +19,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import AddIcon from '@mui/icons-material/Add';
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import IconButton from '@mui/material/IconButton';
-import Modal from '@mui/material/Modal';
 import FoodInput from './FoodInput';
-import Grid from '@mui/material/Grid';
 
 const editItemContext = React.createContext();
 
@@ -159,7 +157,7 @@ export default function Mainlist() {
         <ListItem sx={{ justifyContent: "flex-end" }}>
           <Tooltip title="Add Item" arrow>
             <IconButton onClick={() => setModalOpen(true)}>
-              <AddIcon />
+              <PlaylistAddIcon />
             </IconButton>
           </Tooltip>
         </ListItem>
@@ -240,12 +238,12 @@ export default function Mainlist() {
               </Button>
             </DialogActions>
           </Dialog>
-          <Modal
+          <Dialog
             open={modalOpen}
             onClose={() => setModalOpen(false)}
           >
             <FoodInput />
-          </Modal>
+          </Dialog>
       </div>
     </div>
   );

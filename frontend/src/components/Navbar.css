@@ -5,7 +5,7 @@
 
 .nav {
     position:fixed;
-    background-color: rgb(33, 155, 33);
+    background-color: #795c52;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -18,6 +18,7 @@
 
 .site-title{
     font-size: 3rem;
+    font-family: 'Brush Script MT', cursive;
 }
 
 .nav ul{

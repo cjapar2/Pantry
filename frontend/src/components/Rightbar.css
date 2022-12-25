@@ -4,12 +4,13 @@
 
 .rightbar{
   position: fixed;
-  right:0;
-  height: 100%;
+  margin-top: 80px;
+  right: 30px;
+  height: 90%;
   width: 20%;
   background-color: rgba(255, 255, 255, 0.518);
-  place-items: center;
   float: left;
+  border-radius: 20px;
 }
 
 .rightbar-buttons{

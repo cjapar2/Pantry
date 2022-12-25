@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import {useAuth} from './AuthProvider';
+import './Login.css'
 
 import pantry from '../asset/pantry.jpg'
 
@@ -61,28 +62,10 @@ function Login() {
   };
 
   return (
-    <div 
-    style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: '100vh',
-      marginLeft: '4%'
-    }}>
-     
+    <div className="login">
       <Grid container component="main" direction="column" sx={{ height: '65vh' }}>
         <Grid xs={6} item component={Paper} elevation={6} rounded justifyContent="center">
-          <Box
-            sx={{
-              my: 17,
-              mx: 4,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '40vw'
-            }}
-          >
+          <Box className="gridBox" sx={{my: 17, mx: 4}}>
             <FormControl  sx={{ 
               mt: 2,
               justifyContent: 'center',
@@ -108,7 +91,7 @@ function Login() {
                    width: '150%'
                  }}/>
                <Button variant='contained' type='submit' size='large' fullWidth
-                 onClick={onLoginSubmit}
+                 onClick={onLoginSubmit} className='loginButton'
                  sx={{
                    alignSelf: 'center',
                    backgroundColor: 'darkblue',

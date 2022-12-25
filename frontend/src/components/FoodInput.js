@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 import './Rightbar.css';
 import {useAuth} from './AuthProvider';
 import {dataBaseContext} from './App';
-import {Typography, Stack, Button} from '@mui/material';
+import {Typography, Stack, Button, DialogContent} from '@mui/material';
 import Box from '@mui/material/Box';
 
 const boxStyle = {
@@ -98,84 +98,82 @@ export default function FoodInput() {
 
   const tagNames = ['Shared', 'Dairy', 'Meat', 'Produce', 'Spice'];
   return (
-    <div>
-			<Box sx={boxStyle}>
-				<Typography id="modal-modal-title"
-					variant="h4"
-				>
-					Add an item
-					</Typography>
-					<Typography/>
-					<form onSubmit={nameSubmit}>
-						<ul>
-							<li className='listItem'>
-								<Typography variant='h6'>
-									Name of Item
-								</Typography>
-								<input
-									id='itemName'
-									type='text'
-									className='addItemName'
-									placeholder='Item Name'
-									onChange={(e) => setItem(e.target.value)}
-								/>
-							</li>
-							<li className='listItem'>
-								<Stack direction='row' spacing={5}>
-									<li ><Typography variant='h6'>
-										Item Quantity</Typography>
-									</li>
-									<li ><Typography variant='h6'>
-										Date Purchased</Typography>
-									</li>
-								</Stack>
-								<Stack direction='row' spacing={10}>
-									<input
-										id='itemCount'
-										type='number'
-										min='0'
-										className='addItemCount'
-										onChange={(e) => setAmount(e.target.value)}
-									/>
+    <DialogContent>
+      <Typography id="modal-modal-title"
+        variant="h4"
+      >
+        Add an item
+        </Typography>
+        <Typography/>
+        <form onSubmit={nameSubmit}>
+          <ul>
+            <li className='listItem'>
+              <Typography variant='h6'>
+                Name of Item
+              </Typography>
+              <input
+                id='itemName'
+                type='text'
+                className='addItemName'
+                placeholder='Item Name'
+                onChange={(e) => setItem(e.target.value)}
+              />
+            </li>
+            <li className='listItem'>
+              <Stack direction='row' spacing={5}>
+                <li ><Typography variant='h6'>
+                  Item Quantity</Typography>
+                </li>
+                <li ><Typography variant='h6'>
+                  Date Purchased</Typography>
+                </li>
+              </Stack>
+              <Stack direction='row' spacing={10}>
+                <input
+                  id='itemCount'
+                  type='number'
+                  min='0'
+                  className='addItemCount'
+                  onChange={(e) => setAmount(e.target.value)}
+                />
 
-									<input
-										id='itemDate'
-										type='date'
-										className='addItemDate'
-										onChange={(e) => setPurchaseDate(e.target.value)}
-									/>
-								</Stack>
-								<li className='boxLabel'>
-									<Typography variant='h6'>Description of Item</Typography>
-								</li>
-								<li><textarea
-									id='itemDesc'
-									type='text'
-									className='addItemDesc'
-									placeholder='Write a description for your item...'
-									onChange={(e) => setNotes(e.target.value)}/>
-								</li>
-								<li className='boxLabel'>
-									<Typography variant='h6'>Tags</Typography>
-								</li>
-								<div className='tags'>
-									{createTagButtons(tagNames, updateTags)}
-								</div>
-								<li className='buttonLi'>
-								<Button variant='contained' type='submit' size='large' fullWidth
-									sx={{
-										alignSelf: 'center',
-										backgroundColor: 'rgb(82, 179, 54)',
-										height: '35px',
-										ml: 1,
-										width: '90%',
-									}}>Add Item</Button>
-								</li>
-							</li>
-						</ul>
-					</form>
-			</Box>
-    </div>
+                <input
+                  id='itemDate'
+                  type='date'
+                  className='addItemDate'
+                  onChange={(e) => setPurchaseDate(e.target.value)}
+                />
+              </Stack>
+              <li className='boxLabel'>
+                <Typography variant='h6'>Description of Item</Typography>
+              </li>
+              <li><textarea
+                id='itemDesc'
+                type='text'
+                className='addItemDesc'
+                placeholder='Write a description for your item...'
+                onChange={(e) => setNotes(e.target.value)}/>
+              </li>
+              <li className='boxLabel'>
+                <Typography variant='h6'>Tags</Typography>
+              </li>
+              <div className='tags'>
+                {createTagButtons(tagNames, updateTags)}
+              </div>
+              <li className='buttonLi'>
+              <Button variant='contained' type='submit' size='large' fullWidth
+                sx={{
+                  alignSelf: 'center',
+                  backgroundColor: 'rgb(82, 179, 54)',
+                  height: '35px',
+                  ml: 1,
+                  width: '90%',
+                }}>Add Item</Button>
+              </li>
+            </li>
+          </ul>
+        </form>
+    </DialogContent>
   )
 }
 

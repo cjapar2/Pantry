@@ -6,7 +6,8 @@ import './Rightbar.css';
 import './FoodInput.js';
 import {useAuth} from './AuthProvider';
 import {dataBaseContext} from './App';
-import {Typography, Stack, Button} from '@mui/material';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 /**
  * Simple component with no state.
@@ -85,108 +86,9 @@ export default function Rightbar() {
 
   const tagNames = ['Shared', 'Dairy', 'Meat', 'Produce', 'Spice'];
   return (
-    <div>
-    <form onSubmit={nameSubmit}>
-      <div className='rightbar'>
-        <div className='rightbar-buttons'>
-          <ul>
-            <li className='boxLabel'>
-              <Typography variant='h6'>
-              Name of Item
-              </Typography>
-            </li>
-            <li><input
-              id='itemName'
-              type='text'
-              className='addItemName'
-              placeholder='Item Name'
-              onChange={(e) => setItem(e.target.value)}
-            />
-            </li>
-            <li></li>
-            <Stack direction='row' spacing={2} >
-              <li className='boxLabel'><Typography variant='h6'>
-                Item Quantity</Typography>
-              </li>
-              <li className='boxLabel'><Typography variant='h6'>
-                Date Purchased</Typography>
-              </li>
-            </Stack>
-
-            <Stack direction='row' spacing={10} >
-            <input
-              id='itemCount'
-              type='number'
-              className='addItemCount'
-              placeholder=''
-              onChange={(e) => setAmount(e.target.value)}/>
-
-            <li><input
-              id='itemDate'
-              type='date'
-              className='addItemDate'
-              placeholder='Input an item to add...'
-              onChange={(e) => setPurchaseDate(e.target.value)}/></li>
-            </Stack>
-
-            <li className='boxLabel'>
-              <Typography variant='h6'>Description of Item</Typography>
-            </li>
-            <li><textarea
-              id='itemDesc'
-              type='text'
-              className='addItemDesc'
-              placeholder='Write a description for your item...'
-              onChange={(e) => setNotes(e.target.value)}/></li>
-
-            <li className='boxLabel'>
-              <Typography variant='h6'>Tags</Typography>
-            </li>
-            <div className='tags'>
-            {createTagButtons(tagNames, updateTags)}
-            </div>
-
-            <li className='buttonLi'>
-            <Button variant='contained' type='submit' size='large' fullWidth
-                 sx={{
-                   alignSelf: 'center',
-                   backgroundColor: 'rgb(82, 179, 54)',
-                   height: '35px',
-                   ml: 1,
-                   width: '90%',
-                 }}>Add Item</Button>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </form>
-    </div>
+    <Tabs className='rightbar'>
+    <Tab label="Members" value="1" />
+    <Tab label="Updates" value="2" />
+    </Tabs>
   );
-}
-
-/**
- * Create buttons for tags
- *
- * @param {tagNames} JSX
- * @param {updateTags} JSX
- * @return {object} JSX
- */
-function createTagButtons(tagNames, updateTags) {
-  const rows = [];
-
-  for (let i = 0; i < tagNames.length; i++) {
-    const name = tagNames[i];
-    rows.push(
-      <label className='tagBox' key={name}>
-        <input type='checkbox'
-          key={name}
-          id={'tag' + name}
-          className='tag'
-          onChange={(e) => updateTags(name, e.target.checked)}
-        />
-          {name}
-      </label>
-    );
-  }
-  return rows;
 }
