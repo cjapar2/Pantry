@@ -23,7 +23,8 @@ const style = {
 };
 
 const buttonStyle = {
-  width: '125px',
+  'width': '125px',
+  'background-color': '#b99387',
 };
 
 const listStyle = {
@@ -129,7 +130,42 @@ export default function Sidebar() {
       <div className='sidebar-buttons'>
         <ul>
           <li>
-            <Button variant="outlined"
+            <Button variant="contained"
+              style={buttonStyle}
+              onClick={() => setCreateOpen(true)}
+              id="createList"
+            >
+              Create a List
+            </Button>
+              <Modal
+              open={createOpen}
+              onClose={() => setCreateOpen(false)}
+            >
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Create a List
+                </Typography>
+                <form onSubmit={createSubmit}>
+                  <ul>
+                    <li style={listStyle}>
+                      <input
+                        id="listName"
+                        type="text"
+                        placeholder="List Name"
+                        onChange={(e) => setListName(e.target.value)}
+                      />
+                    </li>
+                    <li style={listStyle} className='buttonLi'>
+                      <button className='createListButton'>Create List</button>
+                      <button onClick={CreateCancel} >Cancel</button>
+                    </li>
+                  </ul>
+                </form>
+              </Box>
+            </Modal>
+          </li>
+          <li>
+            <Button variant="contained"
               style={buttonStyle}
               onClick={() => setJoinOpen(true)}
               id="joinList"
@@ -171,40 +207,6 @@ export default function Sidebar() {
                     </Stack>
                   </form>
                 </Typography>
-              </Box>
-            </Modal></li>
-          <li>
-            <Button variant="outlined"
-              style={buttonStyle}
-              onClick={() => setCreateOpen(true)}
-              id="createList"
-            >
-              Create a List
-            </Button>
-            <Modal
-              open={createOpen}
-              onClose={() => setCreateOpen(false)}
-            >
-              <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Create a List
-                </Typography>
-                <form onSubmit={createSubmit}>
-                  <ul>
-                    <li style={listStyle}>
-                      <input
-                        id="listName"
-                        type="text"
-                        placeholder="List Name"
-                        onChange={(e) => setListName(e.target.value)}
-                      />
-                    </li>
-                    <li style={listStyle} className='buttonLi'>
-                      <button className='createListButton'>Create List</button>
-                      <button onClick={CreateCancel} >Cancel</button>
-                    </li>
-                  </ul>
-                </form>
               </Box>
             </Modal>
           </li>

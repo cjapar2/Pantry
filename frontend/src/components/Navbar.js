@@ -33,7 +33,7 @@ export default function Navbar() {
   const id = open ? 'simple-popover' : undefined;
   return (
     <nav className="nav">
-      <a href="/" className="site-title">
+      <a href="/mainlist" className="site-title">
         Pantry
       </a>
       <ul>

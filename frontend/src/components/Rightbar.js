@@ -3,11 +3,11 @@
 
 import React, {useState} from 'react';
 import './Rightbar.css';
-import './FoodInput.js';
 import {useAuth} from './AuthProvider';
 import {dataBaseContext} from './App';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 
 /**
  * Simple component with no state.
@@ -86,9 +86,12 @@ export default function Rightbar() {
 
   const tagNames = ['Shared', 'Dairy', 'Meat', 'Produce', 'Spice'];
   return (
-    <Tabs className='rightbar'>
+    <div className='rightbar'>
+    <Tabs>
+    {/* <Tab icon={<PeopleAltIcon/>} aria-label="members"/> */}
     <Tab label="Members" value="1" />
     <Tab label="Updates" value="2" />
     </Tabs>
+    </div>
   );
 }

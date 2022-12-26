@@ -19,8 +19,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
-import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
 import FoodInput from './FoodInput';
 
 const editItemContext = React.createContext();
@@ -156,9 +155,19 @@ export default function Mainlist() {
         {/* Button that opens the add food item modal popup */}
         <ListItem sx={{ justifyContent: "flex-end" }}>
           <Tooltip title="Add Item" arrow>
-            <IconButton onClick={() => setModalOpen(true)}>
-              <PlaylistAddIcon />
-            </IconButton>
+            <Button
+              style={{borderRadius: 35,
+                backgroundColor: "#b99387",
+                padding: "10px 20px",
+                fontSize: "15px",
+                color: "white"
+                }}
+              variables="contained"
+              startIcon={<AddIcon/>}
+              onClick={() => setModalOpen(true)}
+            >
+                Add Item
+            </Button>
           </Tooltip>
         </ListItem>
       </List>
